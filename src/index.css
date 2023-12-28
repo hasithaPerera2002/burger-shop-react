@@ -1,9 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis&family=Inter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dosis&family=Inter&family=Kadwa&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer components {
-    .primary-color{
-        @apply bg-slate-800;
-    }
+
+}
+.blur-background {
+    background: transparent;
+    backdrop-filter: blur(10px);
 }
