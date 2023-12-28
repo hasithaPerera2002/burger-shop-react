@@ -9,7 +9,7 @@ function Navbar() {
                 <div className="flex justify-between    px-[176px] flex-row items-center h-full ">
                     <div className={""}>
                         <img src={log2} className="h-[40px] ms-4  w-[45px] object-fill" alt="Logo"/>
-                        <div className={"text-tertiary font-normal font-inter"}>burger blitz</div>
+                        <div className={"text-tertiary font-normal font-inter"} >burger blitz</div>
                     </div>
                     {/* Adjust the height as needed */}
 
