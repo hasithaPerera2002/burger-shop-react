@@ -1,11 +1,11 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 interface ColorReducer {
-    color:string
+    value:string
 }
 
 const initialState:ColorReducer =  {
-  color: 'primary'
+  value: 'primary'
 }
 
 export const colorReducer = createSlice({
@@ -13,11 +13,11 @@ export const colorReducer = createSlice({
     initialState,
     reducers: {
        primary: (state) => {
-           state.color = 'primary'
+           state.value = 'primary'
        },
          secondary: (state) => {
 
-              state.color = 'secondary'
+              state.value = 'secondary'
          },
     }
 
