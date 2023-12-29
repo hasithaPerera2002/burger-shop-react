@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Dosis&family=Inter&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Dosis&family=Inter&family=Kadwa&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Kadwa&family=Rampart+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chango&family=Kadwa&family=Rampart+One&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -9,7 +10,4 @@
 @layer components {
 
 }
-.blur-background {
-    background: transparent;
-    backdrop-filter: blur(10px);
-}
+

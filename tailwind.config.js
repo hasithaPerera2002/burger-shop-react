@@ -20,6 +20,7 @@ export default {
                 'inter': ['Inter', 'sans-serif'],
                 'kadwa': ['Kadwa', 'serif'],
                 'rampart': ['Rampart One', 'sans-serif'],
+                'chango': ['Chango', 'sans-serif']
             },
             boxShadow: {
                 'card': '0 6px 20px 0 rgb(1 5 64 / 21%)'

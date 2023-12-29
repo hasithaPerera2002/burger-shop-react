@@ -1,7 +1,8 @@
-import {Link} from "react-router-dom";
+
 import log2 from '../assets/macaron_4746242.png';
 import {useSelector} from "react-redux";
 import {RootState} from "../state/state.ts";
+import Links from "./links.tsx";
 
 
 function Navbar() {
@@ -18,16 +19,9 @@ function Navbar() {
 
 
                     <ul className={`list-none flex ${selector == 'primary' ? 'text-tertiary' :'text-primary'} gap-5 font-inter  items-center basis-1/3 h-full  justify-between`}>
-                        <li className={"leading-relaxed"}>
-                            <Link to={"/"} className={"font-inter"}>home</Link>
-                        </li>
-                        <li>
-                            <Link to={"/menu"}>menu</Link>
-                        </li>
-                        <li>
-                            <Link to={"/offers"}>offers</Link>
-
-                        </li>
+                        <Links text={"home"} where={"/"}/>
+                        <Links text={"menu"} where={"/menu"}/>
+                        <Links text={"offers"} where={"/offers"}/>
                     </ul>
 
 
