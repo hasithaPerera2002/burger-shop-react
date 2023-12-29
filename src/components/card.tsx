@@ -4,6 +4,9 @@ interface CardProps {
     height: number;
     width: number;
     image: string;
+    heroText:string;
+    price:number;
+    time:string
 }
 
 function Card({height, width, image}: CardProps) {
