@@ -8,9 +8,12 @@ import arrow from '../assets/arrow.png';
 import sandwich2 from '../assets/sandwich-2.jpg'
 import sandwich1 from '../assets/sandwich-1.jpg'
 import burger1 from "../assets/hero-burer.jpg"
+import burgerDash from "../assets/burgerdash.png"
+import waiter from "../assets/waiter.jpg"
 import {motion} from "framer-motion";
 import RoundButton from "../components/roundButton.tsx";
 import OfferCard from "../components/cards/card.tsx";
+
 
 function Home() {
 
@@ -105,7 +108,7 @@ function Home() {
 
                 </div>
             </section>
-            <section className={"h-[120vh] bg-primary relative "}>
+            <section className={"h-[140vh] bg-primary relative "}>
                 <div className={"h-48 bg-quinary w-full"}>
                     <div className={"px-[10rem] flex  items-center h-full "}>
                         <img src={arrow} className={"h-40 left-[10rem]"} alt=""/>
@@ -121,9 +124,49 @@ function Home() {
 
                 </div>
                 <div className={"px-[10rem] mt-16 flex  gap-6 h-[80vh] relative"}>
-                    <OfferCard height={80} width={20} image={burger1} heroText={"breakfasts burger"} price={700} time={"5-10"}/>
-                    <OfferCard height={80} width={20} image={burger1} heroText={"blueberry sandwich"} price={1200} time={"5-10"}/>
-                    <OfferCard height={80} width={20} image={burger1} heroText={"cheese burger"} price={900} time={"5-10"}/>
+                    <OfferCard height={80} width={20} image={burger1} heroText={"breakfasts burger"} price={700}
+                               time={"5-10"}/>
+                    <OfferCard height={80} width={20} image={burger1} heroText={"blueberry sandwich"} price={1200}
+                               time={"5-10"}/>
+                    <OfferCard height={80} width={20} image={burger1} heroText={"cheese burger"} price={900}
+                               time={"5-10"}/>
+                </div>
+            </section>
+            {/*servant section*/}
+            <section className={"h-[100vh] pt-10 bg-secondary relative overflow-hidden"}>
+                <img src={burgerDash} className={"absolute h-[20rem] right-[1rem] bottom-[1rem]"} alt=""/>
+                <div className={"mx-[10rem]  justify-center items-center flex h-[90vh]"}>
+                    <div className={"h-[80vh] w-1/2 bg-black bg-opacity-20 mx-16 rounded-[23px]  border-opacity-30"}>
+                        <img src={waiter} className={"object-cover rounded-[23px] opacity-85 shadow h-full"} alt=""/>
+                    </div>
+                    <div className={"w-1/2"}>
+                        <div className={" font-normal font-chango text-tertiary text-5xl leading-[70px]"}>
+                            where taste finds its true <span className={"font-rampart"}>Essence</span>
+                        </div>
+                        <div className={"text-white text-1xl font-normal mt-2 font-['Inter'] leading-[25px]"}>
+                            Embrace Authentic Flavor: Where Taste Finds its Home. Our curated menu, crafted with premium
+                            ingredients, delivers a symphony of satisfaction. Led by passionate chefs, we redefine
+                            culinary excellence in every bite. <br/><br/>
+                            Join us for a taste adventure that celebrates genuine flavors and unforgettable experiences.
+                            Step into our world and savor the true essence of taste
+                        </div>
+                        <div className={"flex mt-10 gap-20"}>
+                            <div className={"text-primary font-kadwa"}>
+                                <div className={"text-5xl font-bold"}>112</div>
+                                <div className={"text-2xl font-bold"}>outline</div>
+                            </div>
+                            <div className={"text-quinary font-kadwa"}>
+                                <div className={"text-5xl font-bold"}>10</div>
+                                <div className={"text-2xl font-bold"}>menu</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            {/*special section*/}
+            <section className={"h-[100vh]"}>
+                <div className={"mx-[10rem]"}>
+                    <div className={"font-kadwa font-bold leading-loose text-center"}>our specials</div>
                 </div>
             </section>
         </>
