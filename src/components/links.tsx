@@ -11,11 +11,11 @@ function Links({text,where}:LinkProps) {
             whileHover='hover'
             variants={{
                 hover: {
-                    scale: 1.25
+                    scale: 1.05
                 }
             }}
             transition={{
-                duration: 0.75,
+                duration: 0.25,
                 ease: "backInOut"
             }}
         >

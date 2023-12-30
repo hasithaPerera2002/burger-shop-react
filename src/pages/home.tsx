@@ -7,9 +7,10 @@ import heroVideo from "../assets/video-hero - Trim.mp4";
 import arrow from '../assets/arrow.png';
 import sandwich2 from '../assets/sandwich-2.jpg'
 import sandwich1 from '../assets/sandwich-1.jpg'
-import Card from "../components/card.tsx";
 import burger1 from "../assets/hero-burer.jpg"
 import {motion} from "framer-motion";
+import RoundButton from "../components/roundButton.tsx";
+import OfferCard from "../components/cards/card.tsx";
 
 function Home() {
 
@@ -33,15 +34,16 @@ function Home() {
                     </div>
                     {/*hero image*/}
                     <motion.div
-                        animate={{y: [0, -10,0],
-                            scale:[1,1.03,1]
+                        animate={{
+                            y: [0, -15, 0],
+                            scale: [1, 1.03, 1]
 
                         }}
                         transition={{
                             ease: "easeInOut",
                             repeat: Infinity,
-                            duration:8,
-                            delay:1,
+                            duration: 5,
+                            delay: 1,
 
                         }}
                         className={"h-[35rem] top-[7rem] left-[50rem] absolute -z-0 w-[27rem]"}>
@@ -53,10 +55,12 @@ function Home() {
                         className={"absolute font-inter text-tertiary font-light left-[10rem] top-[30rem] leading-7 tracking-wide italic"}>
                         “ delight in the perfect fusion of <br/> freshness and flavor in every bite “
                     </div>
-                    <button
-                        className="absolute bg-quaternary px-6 py-2 shadow rounded-2xl text-tertiary font-inter top-[37rem] left-[10rem] ">order
-                        now
-                    </button>
+                    {/*order button*/}
+
+                    <div className={"top-[37rem] bg-q left-[10rem] absolute"}>
+                        <RoundButton color={"quaternary"} fontColor={"tertiary"} text={"order now"}/>
+
+                    </div>
                     <div className={"top-[36.5rem] flex left-[22rem] absolute"}>
                         <div className="w-[55px] flex justify-center items-center h-[55px] bg-zinc-300 rounded-full">
                             <img src={human} className={"rounded-full h-[50px] w-[50px]"} alt=""/>
@@ -117,9 +121,9 @@ function Home() {
 
                 </div>
                 <div className={"px-[10rem] mt-16 flex  gap-6 h-[80vh] relative"}>
-                    <Card height={80} width={20} image={burger1}/>
-                    <Card height={80} width={20} image={burger1}/>
-                    <Card height={80} width={20} image={burger1}/>
+                    <OfferCard height={80} width={20} image={burger1} heroText={"breakfasts burger"} price={700} time={"5-10"}/>
+                    <OfferCard height={80} width={20} image={burger1} heroText={"blueberry sandwich"} price={1200} time={"5-10"}/>
+                    <OfferCard height={80} width={20} image={burger1} heroText={"cheese burger"} price={900} time={"5-10"}/>
                 </div>
             </section>
         </>
