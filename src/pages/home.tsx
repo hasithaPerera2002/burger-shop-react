@@ -9,10 +9,12 @@ import sandwich2 from '../assets/sandwich-2.jpg'
 import sandwich1 from '../assets/sandwich-1.jpg'
 import burger1 from "../assets/hero-burer.jpg"
 import burgerDash from "../assets/burgerdash.png"
+import chickenBurger from "../assets/chicken-burger-with-french-fries-table.jpg"
 import waiter from "../assets/waiter.jpg"
 import {motion} from "framer-motion";
 import RoundButton from "../components/roundButton.tsx";
-import OfferCard from "../components/cards/card.tsx";
+import OfferCard from "../components/cards/offerCard.tsx";
+import SpecialCard from "../components/cards/specialCard.tsx";
 
 
 function Home() {
@@ -164,9 +166,24 @@ function Home() {
                 </div>
             </section>
             {/*special section*/}
-            <section className={"h-[100vh]"}>
+            <section className={"h-[120vh] bg-primary relative"}>
                 <div className={"mx-[10rem]"}>
-                    <div className={"font-kadwa font-bold leading-loose text-center"}>our specials</div>
+                    <div className={"font-kadwa text-7xl py-5 text-tertiary font-bold leading-relaxed text-center"}>our
+                        specials
+                    </div>
+                    <div className={"relative h-[90vh]  items-center gap-6 flex "}>
+                        <SpecialCard price={4000} time={"9.00 AM"} width={30}  height={80} image={chickenBurger}
+                                     heroText={"double bbq burger"} list1={"french fries"} list2={"two burgers"}
+                                     list3={"drinks"}/>
+                        <SpecialCard price={4000} time={"9.00 AM"} width={40}
+                                     height={90} image={chickenBurger}
+                                     heroText={"double bbq burger"}
+                                     list1={"french fries"} list2={"two burgers"}
+                                     list3={"drinks"}/>
+                        <SpecialCard price={4000} time={"9.00 AM"} width={30} height={80} image={chickenBurger}
+                                     heroText={"double bbq burger"} list1={"french fries"} list2={"two burgers"}
+                                     list3={"drinks"}/>
+                    </div>
                 </div>
             </section>
         </>
