@@ -34,7 +34,7 @@ function SpecialCard({
                      }: SpecialProps) {
     console.log(ml)
     return (
-        <div className={`h-[${height}vh] shadow z-[1] w-[${width}rem] overflow-hidden relative`}>
+        <div className={`h-[${height}vh] border-opacity-20 border-black shadow z-[1] w-[${width}rem] overflow-hidden relative`}>
             <div
                 className={"absolute text-6xl text-shadow-sm shadow-blue-950 top-7 left-5 leading-relaxed text-tertiary font-bold font-kadwa"}>Rs {price}</div>
             <div
