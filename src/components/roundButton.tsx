@@ -4,12 +4,12 @@ interface ButtonProps {
     color:string,
     fontColor:string,
     text:string,
-    width?:string,
     height?:string,
+    width?:string,
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-function RoundButton({color,fontColor,text,width,height,onClick}:ButtonProps) {
+function RoundButton({color,fontColor,height,width,text,onClick}:ButtonProps) {
     return (
         <motion.button
             whileHover={{
@@ -19,7 +19,7 @@ function RoundButton({color,fontColor,text,width,height,onClick}:ButtonProps) {
             whileTap={{
                 scale:0.9
             }}
-            className={`bg-${color} px-6 py-2 shadow rounded-2xl text-${fontColor} font-normal w-[${width}] h-[${height}] font-inter`}
+            className={`bg-${color} px-6 py-2 shadow h-[${height}] w-[${width}] rounded-2xl text-${fontColor} font-normal font-inter`}
                 onClick={onClick}>
             {text}
         </motion.button>

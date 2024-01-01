@@ -23,6 +23,9 @@ function OfferCard({height, width, image, time, price, heroText}: CardProps) {
                 duration: 0.5,
                 ease: "backInOut"
             }}
+            whileTap={{
+                scale:0.9
+            }}
             className={`h-[${height}vh] w-[${width}vw] relative hover:scale-125 overflow-hidden`}>
             <motion.img
                 variants={{

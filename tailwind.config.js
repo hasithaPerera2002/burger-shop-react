@@ -12,7 +12,7 @@ export default {
                 'primary': '#2B2D42',
                 'secondary': '#8D99AE',
                 'tertiary': '#EDF2F4',
-                'quaternary': '#EF233C',
+                'quad': '#EF233C',
                 'quinary': '#D90429'
             },
             fontFamily: {
