@@ -66,6 +66,10 @@ function Footer() {
             </svg>
             <br/>
             <hr/>
+            <div className={"bg-primary text-tertiary font-thin text-center"}>
+                  copyrights @ 2024 Hasitha Perera | All Rights Reserved
+            </div>
+            <br/>
         </section>
     );
 }

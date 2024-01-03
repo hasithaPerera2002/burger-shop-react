@@ -135,7 +135,8 @@ function Home() {
                     staggerChildren: 0.65
                 }}
                 viewport={{
-                    once: true
+                    once: true,
+
                 }}
                 className={"relative bg-tertiary h-[100vh]"}>
                 <video autoPlay loop muted className=" inset-0 w-full h-full object-cover z-0">
@@ -183,7 +184,8 @@ function Home() {
                     initial={"hidden"}
                     whileInView={"visible"}
                     viewport={{
-                        once: true
+                        once: true,
+                        amount:0.5
                     }}
                     transition={{
                         staggerChildren: 0.15
@@ -237,7 +239,8 @@ function Home() {
                         staggerChildren: 0.2
                     }}
                     viewport={{
-                        once: true
+                        once: true,
+                        amount:0.3
                     }}
                     className={"mx-[10rem]  justify-center items-center flex h-[90vh]"}>
                     <motion.div

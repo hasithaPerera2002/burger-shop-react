@@ -22,9 +22,9 @@ function Navbar() {
 
 
                     <ul className={`list-none flex ${selector == 'primary' ? 'text-tertiary' : 'text-primary'} gap-5 font-inter  items-center basis-1/3 h-full  justify-between`}>
-                        <Links text={"home"} where={"/"}/>
-                        <Links text={"menu"} where={"/menu"}/>
-                        <Links text={"offers"} where={"/offers"}/>
+                        <Links text={"home"} where={""}/>
+                        <Links text={"menu"} where={"menu"}/>
+                        <Links text={"offers"} where={"offers"}/>
                     </ul>
 
 
