@@ -33,6 +33,7 @@ function MenuCard({image,name,price}:MenuCardProps) {
 
     const handleHover = async () => {
         await controls.start("animate");
+
     };
 
     const handleHoverEnd = async () => {

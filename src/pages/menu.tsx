@@ -18,7 +18,7 @@ function Menu() {
     return (
         <section className={"bg-secondary min-h-[100vh] w-full pt-28"}>
             <div className={"mx-[10rem]  "}>
-                <div className={"font-normal font-inter text-5xl text-center text-tertiary mb-28"}>menu</div>
+                <div className={"font-normal font-inter text-7xl text-center text-tertiary mb-28"}>menu</div>
                 <div className={" flex flex-wrap h-full"}>
                     <div className={"w-full rounded-3xl overflow-hidden sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 p-4"}>
                         <MenuCard image={image1} name={"lorem"} price={100}/>
