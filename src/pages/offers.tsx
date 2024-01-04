@@ -6,6 +6,7 @@ import OffersCard from "../components/cards/offersCard.tsx";
 
 
 function Offers() {
+    document.title="Offers";
 
     const dispatch = useDispatch();
 

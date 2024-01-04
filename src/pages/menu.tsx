@@ -8,6 +8,7 @@ import MenuCard from "../components/cards/menuCard.tsx";
 
 
 function Menu() {
+    document.title="Menu";
     const dispatch = useDispatch();
 
     useEffect(() => {

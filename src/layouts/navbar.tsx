@@ -3,6 +3,8 @@ import {useSelector} from "react-redux";
 import {RootState} from "../state/state.ts";
 import Links from "../components/links.tsx";
 import RoundButton from "../components/roundButton.tsx";
+import {Link} from "react-router-dom";
+
 
 
 function Navbar() {
@@ -29,8 +31,12 @@ function Navbar() {
 
 
                     <div className="flex items-center  gap-4">
-                        <RoundButton color={"tertiary"} fontColor={"black"} text={"Sign In"} />
-                        <RoundButton color={"secondary"} fontColor={"black"} text={"Sign Up"}/>
+                        <Link to={"signIn"} target={"_blank"}>
+                            <RoundButton color={"tertiary"}  fontColor={"black"} text={"Sign In"}/></Link>
+                        <Link to={"signUp"} target={"_blank"}>
+                            <RoundButton color={"secondary"}  fontColor={"black"}
+                                         text={"Sign Up"}/>
+                        </Link>
                     </div>
                 </div>
             </div>

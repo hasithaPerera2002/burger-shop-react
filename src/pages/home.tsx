@@ -21,7 +21,7 @@ import SpecialCard from "../components/cards/specialCard.tsx";
 
 
 function Home() {
-
+    document.title="Home";
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(primary())

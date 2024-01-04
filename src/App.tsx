@@ -6,27 +6,31 @@ import Navbar from "./layouts/navbar.tsx";
 import Footer from "./layouts/footer.tsx";
 
 
+
 function handleScroll() {
     console.log('handle scroll app.tsx');
 }
 
 const LoadingScreen = () => {
 
-    // Simulating a delay to showcase loading behavior
+
 
 
     return (
         <>
 
-            <Navbar/>
-            <div className="overscroll-contain" onScroll={handleScroll}>
-                <Routes>
-                    <Route path="/" element={<Home/>}/>
-                    <Route path="/menu" element={<Menu/>}/>
-                    <Route path="/offers" element={<Offers/>}/>
-                </Routes>
-            </div>
-            <Footer/>
+                < Navbar />
+                <div className="overscroll-contain" onScroll={handleScroll}>
+                    <Routes >
+                        <Route path="/" element={<Home/>}/>
+                        <Route path="menu" element={<Menu/>}/>
+                        <Route path="offers" element={<Offers/>}/>
+
+                    </Routes>
+                </div>
+                <Footer/>
+
+
 
         </>
     );
