@@ -9,9 +9,14 @@ interface MenuCardProps {
 
 function MenuCard({image,name,price}:MenuCardProps) {
     const imageVariant =  {
-      initial:{
-
-      },
+        initial: {
+            scale: 1.01,
+            filter: 'blur(0px)',
+            transition: {
+                duration: 0.25,
+                ease: 'easeInOut'
+            }
+        },
       animate:{
           scale:0.95,
           filter: 'blur(1px)',
@@ -47,7 +52,7 @@ function MenuCard({image,name,price}:MenuCardProps) {
            <motion.div className={"h-3/4 "}
                variants={imageVariant}
                initial={"initial"}
-               whileHover={"animate"}>
+               animate={controls}>
                <img
 
                    src={image} className={"object-cover scale-105 h-full "} alt=""/>
