@@ -43,7 +43,7 @@ function MenuCard({image,name,price}:MenuCardProps) {
         <motion.div
             onHoverStart={handleHover}
             onHoverEnd={handleHoverEnd}
-            className={"h-[25rem] my-5 bg-tertiary relative overflow-hidden rounded-3xl"}>
+            className={"h-[25rem] shadow-custom-shadow my-5 bg-tertiary relative overflow-hidden rounded-3xl"}>
            <motion.div className={"h-3/4 "}
                variants={imageVariant}
                initial={"initial"}

@@ -1,7 +1,6 @@
 import {useDispatch} from "react-redux";
-import { secondary} from "../state/colorReducer.ts";
+import {secondary} from "../state/colorReducer.ts";
 import {useEffect} from "react";
-
 
 
 function Offers() {
@@ -14,10 +13,18 @@ function Offers() {
     }, []);
 
 
-
     return (
-        <div className={'h-[100vh] bg-amber-300'}>hi</div>
-    );
+        <section className={"bg-secondary min-h-[100vh] w-full pt-28"}>
+            <div className={"mx-[10rem]  "}>
+                <div className={"font-normal font-inter text-7xl text-center text-tertiary mb-28"}>offers</div>
+                <div className={" flex flex-wrap h-full"}>
+
+
+                </div>
+            </div>
+        </section>
+    )
+        ;
 }
 
 export default Offers;

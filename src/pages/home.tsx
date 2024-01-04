@@ -17,7 +17,7 @@ import {motion,} from "framer-motion";
 import RoundButton from "../components/roundButton.tsx";
 import OfferCard from "../components/cards/offerCard.tsx";
 import SpecialCard from "../components/cards/specialCard.tsx";
-import Footer from "../layouts/footer.tsx";
+
 
 
 function Home() {
@@ -364,7 +364,7 @@ function Home() {
                         fill="#EDF2F4" fillOpacity="0.5"/>
                 </svg>
             </section>
-            <Footer/>
+
         </>
     );
 }

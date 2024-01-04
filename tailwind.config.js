@@ -23,7 +23,8 @@ export default {
                 'chango': ['Chango', 'sans-serif']
             },
             boxShadow: {
-                'card': '0 6px 20px 0 rgb(1 5 64 / 21%)'
+                'card': '0 6px 20px 0 rgb(1 5 64 / 21%)',
+                'custom-shadow': '0px 0px 10px 5px rgba(0,0,0,0.2)',
 
             },
             textShadow: {
@@ -31,7 +32,8 @@ export default {
                 DEFAULT: '2px 2px 4px var(--tw-shadow-color)',
                 lg: '4px 4px 8px var(--tw-shadow-color)',
                 xl: '4px 4px 16px var(--tw-shadow-color)',
-            }
+            },
+
         },
     },
     plugins: [
