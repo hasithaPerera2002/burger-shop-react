@@ -1,8 +1,6 @@
 import {useDispatch} from "react-redux";
 import {useEffect} from "react";
 import {primary} from "../state/colorReducer.ts";
-import hero_burger from "../assets/hero-burger.png";
-import human from "../assets/human.jpg";
 import heroVideo from "../assets/video-hero - Trim.mp4";
 import arrow from '../assets/arrow.png';
 import sandwich2 from '../assets/sandwich-2.jpg'
@@ -14,14 +12,12 @@ import waiter from "../assets/waiter.jpg"
 import twoBurgers from "../assets/hero-burer.jpg"
 import cheeseBurger from "../assets/cheese-burger-2.jpg"
 import {motion,} from "framer-motion";
-import RoundButton from "../components/roundButton.tsx";
 import OfferCard from "../components/cards/offerCard.tsx";
 import SpecialCard from "../components/cards/specialCard.tsx";
 
 
-
 function Home() {
-    document.title="Home";
+    document.title = "Home";
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(primary())
@@ -36,7 +32,7 @@ function Home() {
             opacity: 1,
             pathLength: 1,
             transition: {
-                duration: 5,
+                duration: 15,
                 ease: "easeInOut",
                 repeat: Infinity
 
@@ -61,131 +57,113 @@ function Home() {
 
         }
     }
+    const falling = {
+        initial: {y: -100, opacity: 0},
+
+        animate: {
+            y: 0, opacity: 1, scale: [1.2, 0.8, 1],
+            transition: {duration: 1.5, type: "spring", damping: 20, stiffness: 500}
+        },
+
+
+    }
 
     return (
         <>
             <section className={"h-[100vh] relative bg-primary flex items-center  justify-center "}>
-                <div className={" border-green-300 w-[80vw] mt-10  h-[90vh] "}>
-                    {/*hero text here*/}
-                    <motion.div drag
-                                dragConstraints={{left: 0, right: 0, top: 0, bottom: 0}}
-                                className={"font-kadwa left-[10rem] absolute top-[10rem] font-bold text-tertiary text-8xl  text-shadow-sm shadow-red-700"}>where
-                        freshness
-                    </motion.div>
-                    <div
-                        className={"font-kadwa absolute text-shadow-sm shadow-red-700  z-[1] top-[17rem] left-[24rem] font-bold text-tertiary text-8xl "}>meets
-                        <span className={"font-rampart tracking-wide"}> flavor</span>
-                    </div>
-                    {/*hero image*/}
-                    <motion.div
-                        drag
-                        draggable
-                        animate={{
-                            y: [0, -15, 0],
-                            scale: [1, 1.03, 1]
-
-                        }}
-                        transition={{
-                            ease: "easeInOut",
-                            repeat: Infinity,
-                            duration: 5,
-                            delay: 1,
-
-                        }}
-                        className={"h-[35rem] top-[7rem] left-[50rem] absolute -z-0 w-[27rem]"}>
-                        <img src={hero_burger} className={"h-full  transform rotate-[27.44deg] object-cover w-full  "}
-                             alt="burger hero png"/>
-                    </motion.div>
-
-                    <div
-                        className={"absolute font-inter text-tertiary font-light left-[10rem] top-[30rem] leading-7 tracking-wide italic"}>
-                        “ delight in the perfect fusion of <br/> freshness and flavor in every bite “
-                    </div>
-                    {/*order button*/}
-
-                    <div className={"top-[37rem]    left-[10rem] absolute"}>
-                        <RoundButton color={"quinary "} fontColor={"tertiary"} text={"order now"}/>
-
-                    </div>
-                    <div className={"top-[36.5rem] flex left-[22rem] absolute"}>
-                        <div className="w-[55px] flex justify-center items-center h-[55px] bg-zinc-300 rounded-full">
-                            <img src={human} className={"rounded-full h-[50px] w-[50px]"} alt=""/>
-                        </div>
-                        <div
-                            className="w-[55px] flex justify-center items-center h-[55px] bg-rose-400 -ml-8 rounded-full">
-                            <img src={human} className={"rounded-full h-[50px] w-[50px]"} alt=""/>
-                        </div>
-                        <div
-                            className="w-[55px] h-[55px] flex justify-center items-center bg-violet-400 -ml-8 rounded-full">
-                            <img src={human} className={"rounded-full h-[50px] w-[50px]"} alt=""/>
-                        </div>
-                        <div
-                            className="flex items-center justify-center w-14 h-14 bg-blue-400 -ml-8 rounded-full text-tertiary">
-                            <p className="m-auto">100+</p>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-            {/*about us */}
-            <motion.section
-                initial={"hidden"}
-                whileInView={"visible"}
-                transition={{
-                    staggerChildren: 0.65
-                }}
-                viewport={{
-                    once: true,
-
-                }}
-                className={"relative bg-tertiary h-[100vh]"}>
-                <video autoPlay loop muted className=" inset-0 w-full h-full object-cover z-0">
+                <video autoPlay loop muted className=" w-100 h-[120vh] object-fill z-0">
                     <source src={heroVideo} type="video/mp4"/>
                     Your browser does not support the video tag.
                 </video>
                 <motion.div
-                    variants={showVariants}
+                    initial={"initial"}
+                    whileInView={"animate"}
+                    viewport={{
+                        once: true,
+                        amount: 0.5
+                    }}
+                    transition={{
+                        staggerChildren: 0.25
+                    }}
+                    className={" border-green-300 w-[40vw] mt-10  h-[90vh] "}>
 
-                    className={"z-1 font-bold font-kadwa absolute top-[5rem] left-[10rem] text-8xl text-tertiary"}>about <span
-                    className={"font-rampart tracking-wide"}>us</span></motion.div>
-                <motion.div
+                    {/*hero text here*/}
+                    <motion.div
+                        variants={
+                            falling
+                        }
+                        className={"font-bungee left-[10rem] absolute top-[6rem] font-bold text-tertiary text-9xl  text-shadow-sm shadow-gray-950"}>WHERE
+                    </motion.div>
+                    <motion.div
+                        variants={falling}
+                        className={"font-bungee left-[10rem] absolute top-[13rem]   text-tertiary text-9xl  text-shadow-sm shadow-gray-950"}>FRESHNESS
+                    </motion.div>
+                    <motion.div
+                        variants={falling}
+                        className={"font-bungee absolute text-shadow-sm shadow-gray-950   top-[20.5rem] left-[10rem] font-bold text-tertiary text-9xl "}>MEETS
+                    </motion.div>
+                    <motion.div
+                        variants={falling}
+                        className={"font-rampart absolute text-shadow-sm shadow-gray-950   top-[25rem] left-[10rem] font-bold text-tertiary text-[10rem] "}>FLAVOR
+                    </motion.div>
+                    <svg
+
+                        xmlns="http://www.w3.org/2000/svg" width="607" height="590" viewBox="0 0 307 290"
+                        className={"absolute  left-[45rem] top-5"} fill="none">
+                        <motion.path
+                            variants={pathVariants}
+                            initial={"hidden"}
+                            animate={"visible"}
+
+                            d="M202.738 163.001L220.527 106.473C221.564 103.178 223.229 100.151 225.428 97.5658C227.626 94.9805 230.314 92.887 233.339 91.4049L234.653 90.7609C240.412 87.9374 247.113 87.633 253.282 89.9148C259.452 92.1965 264.585 96.8773 267.551 102.928C270.517 108.978 271.075 115.902 269.1 122.177C267.125 128.451 262.781 133.563 257.022 136.386L83.3122 221.553C77.5534 224.377 70.8521 224.681 64.6824 222.399C58.5128 220.117 53.3802 215.437 50.4139 209.386C47.4475 203.336 46.8904 196.412 48.865 190.137C50.8395 183.863 55.1841 178.751 60.943 175.928L109.962 151.895C127.236 143.427 147.336 142.513 165.842 149.356L202.738 163.001ZM72.4554 226.876L267.879 131.063L279.063 153.876C283.513 162.951 284.349 173.337 281.387 182.749C278.425 192.161 271.908 199.828 263.27 204.063L132.988 267.939C124.349 272.174 114.297 272.63 105.043 269.208C95.7884 265.785 88.0896 258.764 83.64 249.689L72.4554 226.876Z"
+                            stroke="#EDF2F4" stroke-opacity="0.5" stroke-width="5" stroke-linecap="round"
+                            stroke-linejoin="round"/>
+                        <motion.path
+                            variants={pathVariants}
+                            initial={"hidden"}
+                            animate={"visible"}
+                            d="M158.01 71.745L157.999 71.7503M131.032 99.1201L131.021 99.1254M108.652 53.5002C58.4603 78.1082 26.9266 118.413 45.1235 169.536C47.4827 176.161 54.95 178.866 60.9429 175.928L234.653 90.7608C240.646 87.8226 243.08 80.2625 239.287 74.3403C210.017 28.6467 158.843 28.8923 108.652 53.5002Z"
+                            stroke="#EDF2F4" stroke-opacity="0.5" stroke-width="5" stroke-linecap="round"
+                            stroke-linejoin="round"/>
+                    </svg>
+                    {/*hero image*/}
 
 
-                    className={"absolute z-1 text-tertiary font-inter font-thin text-shadow-lg shadow-blue-950 text-2xl italic top-[14rem] px-[10rem] backdrop-blur"}>
-                    <motion.p
-                        variants={showVariants}
-                    >
-                        In our burger haven, taste isn't just a promise; it's a tradition we meticulously
-                        uphold. <br/>
-                        With an unwavering commitment to freshness, every ingredient is handpicked to ensure supreme
-                        quality
-                        and delectable flavors.Guided by seasoned chefs, our kitchen is a melting pot of culinary
-                        expertise,
-                        where every burger is a masterpiece in taste.
-                    </motion.p>
-                    <br/>
-                    <motion.p
-                        variants={showVariants}
-                    >Each bite tells a tale of our passion for crafting burgers that redefine the boundaries of taste
-                        and
-                        freshness.
-                    </motion.p>
-                    <br/>
-                    <motion.p
-                        variants={showVariants}
-                    >Join us in experiencing a flavorful journey that resonates with our dedication to quality and the
-                        joy of savoring every bite.
-                    </motion.p>
+                    {/*order button*/}
+
+                    {/*<div className={"top-[37rem]    left-[10rem] absolute"}>*/}
+                    {/*    <RoundButton color={"quinary "} fontColor={"tertiary"} text={"order now"}/>*/}
+
+                    {/*</div>*/}
+                    {/*<div className={"top-[36.5rem] flex left-[22rem] absolute"}>*/}
+                    {/*    <div className="w-[55px] flex justify-center items-center h-[55px] bg-zinc-300 rounded-full">*/}
+                    {/*        <img src={human} className={"rounded-full h-[50px] w-[50px]"} alt=""/>*/}
+                    {/*    </div>*/}
+                    {/*    <div*/}
+                    {/*        className="w-[55px] flex justify-center items-center h-[55px] bg-rose-400 -ml-8 rounded-full">*/}
+                    {/*        <img src={human} className={"rounded-full h-[50px] w-[50px]"} alt=""/>*/}
+                    {/*    </div>*/}
+                    {/*    <div*/}
+                    {/*        className="w-[55px] h-[55px] flex justify-center items-center bg-violet-400 -ml-8 rounded-full">*/}
+                    {/*        <img src={human} className={"rounded-full h-[50px] w-[50px]"} alt=""/>*/}
+                    {/*    </div>*/}
+                    {/*    <div*/}
+                    {/*        className="flex items-center justify-center w-14 h-14 bg-blue-400 -ml-8 rounded-full text-tertiary">*/}
+                    {/*        <p className="m-auto">100+</p>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
 
                 </motion.div>
-            </motion.section>
+            </section>
+            {/*about us */}
+
             <section className={"h-[140vh] bg-primary relative "}>
                 <motion.div
                     initial={"hidden"}
                     whileInView={"visible"}
                     viewport={{
                         once: true,
-                        amount:0.5
+                        amount: 0.5
                     }}
                     transition={{
                         staggerChildren: 0.15
@@ -240,7 +218,7 @@ function Home() {
                     }}
                     viewport={{
                         once: true,
-                        amount:0.3
+                        amount: 0.3
                     }}
                     className={"mx-[10rem]  justify-center items-center flex h-[90vh]"}>
                     <motion.div
