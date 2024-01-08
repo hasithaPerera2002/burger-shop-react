@@ -32,7 +32,7 @@ function Home() {
             opacity: 1,
             pathLength: 1,
             transition: {
-                duration: 15,
+                duration: 7,
                 ease: "easeInOut",
                 repeat: Infinity
 
@@ -83,7 +83,7 @@ function Home() {
                         amount: 0.5
                     }}
                     transition={{
-                        staggerChildren: 0.25
+                        staggerChildren: 0.4
                     }}
                     className={" border-green-300 w-[40vw] mt-10  h-[90vh] "}>
 

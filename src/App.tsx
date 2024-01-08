@@ -11,10 +11,7 @@ function handleScroll() {
     console.log('handle scroll app.tsx');
 }
 
-const LoadingScreen = () => {
-
-
-
+const App = () => {
 
     return (
         <>
@@ -36,4 +33,4 @@ const LoadingScreen = () => {
     );
 };
 
-export default LoadingScreen;
+export default App;
