@@ -1,20 +1,46 @@
 import {useDispatch} from "react-redux";
 import {secondary} from "../state/colorReducer.ts";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import image1 from "../assets/delicious-cheeseburger.jpg";
 import OffersCard from "../components/cards/offersCard.tsx";
+import Loader from "./helpers/loader.tsx";
+import ServerErr from "./helpers/ServerErr.tsx";
+import axios from "axios";
 
 
 function Offers() {
-    document.title="Offers";
+    document.title = "Offers";
 
     const dispatch = useDispatch();
+    const [burgerList, setBurgerList] = useState([])
+    const [loading, setLoading] = useState(true);
+    const [fetchError, setFetchError] = useState(false);
 
     useEffect(() => {
-        // Dispatch 'primary' action when the component mounts
-        dispatch(secondary());
-    }, []);
+        const fetchData = async () => {
+            try {
 
+
+                const response = await axios.get('http://localhost:8080/api/v1/burgers');
+                setBurgerList(response.data)
+                console.log(burgerList)
+
+            } catch (e) {
+
+                setFetchError(true);
+
+
+            } finally {
+                setLoading(false)
+            }
+
+        }
+
+        fetchData();
+        dispatch(secondary());
+    }, [dispatch,]);
+    if (loading) return <Loader/>
+    if (fetchError) return <ServerErr/>
 
     return (
         <section className={"bg-secondary min-h-[100vh] w-full pt-28"}>

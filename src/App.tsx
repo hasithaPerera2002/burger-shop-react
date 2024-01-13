@@ -1,10 +1,12 @@
+import Footer from "./layouts/footer.tsx";
+import React from 'react';
 import {Routes, Route} from 'react-router-dom';
 import Home from "./pages/home.tsx";
-import Menu from "./pages/menu.tsx";
-import Offers from "./pages/offers.tsx";
+const LazyMenu = React.lazy(()=> import('./pages/menu.tsx'))
+const LazyOffer = React.lazy(()=> import('./pages/offers.tsx'))
 import Navbar from "./layouts/navbar.tsx";
-import Footer from "./layouts/footer.tsx";
 
+import Loader from "./pages/helpers/loader.tsx";
 
 
 function handleScroll() {
@@ -16,17 +18,21 @@ const App = () => {
     return (
         <>
 
-                < Navbar />
-                <div className="overscroll-contain" onScroll={handleScroll}>
-                    <Routes >
-                        <Route path="/" element={<Home/>}/>
-                        <Route path="menu" element={<Menu/>}/>
-                        <Route path="offers" element={<Offers/>}/>
+            < Navbar/>
+            <div className="overscroll-contain" onScroll={handleScroll}>
+                <Routes>
+                    <Route path="/home" element={<Home/>}/>
+                    <Route path="/menu" element={<React.Suspense fallback={<Loader/>}>
+                        <LazyMenu/>
+                    </React.Suspense>}/>
+                    <Route path="/offers" element={<React.Suspense fallback={<Loader/>}>
+                        <LazyOffer/>
+                    </React.Suspense>}/>
 
-                    </Routes>
-                </div>
-                <Footer/>
 
+                </Routes>
+            </div>
+            <Footer/>
 
 
         </>
