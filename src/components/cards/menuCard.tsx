@@ -18,7 +18,7 @@ function MenuCard({image,name,price}:MenuCardProps) {
             }
         },
       animate:{
-          scale:0.95,
+          scale:0.99,
           filter: 'blur(1px)',
           transition:{
             duration:0.25,
@@ -49,13 +49,13 @@ function MenuCard({image,name,price}:MenuCardProps) {
             onHoverStart={handleHover}
             onHoverEnd={handleHoverEnd}
             className={"h-[25rem] shadow-custom-shadow my-5 bg-tertiary relative overflow-hidden rounded-3xl"}>
-           <motion.div className={"h-3/4 "}
+           <motion.div className={"h-3/4 flex flex-wrap content-center justify-center "}
                variants={imageVariant}
                initial={"initial"}
                animate={controls}>
                <img
 
-                   src={image} className={"object-cover scale-105 h-full "} alt=""/>
+                   src={image} className={"object-cover scale-110 h-full "} alt=""/>
            </motion.div>
             <motion.div
                 variants={showVariant}

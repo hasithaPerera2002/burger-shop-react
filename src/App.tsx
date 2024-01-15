@@ -21,7 +21,7 @@ const App = () => {
             < Navbar/>
             <div className="overscroll-contain" onScroll={handleScroll}>
                 <Routes>
-                    <Route path="/home" element={<Home/>}/>
+                    <Route path="/home" element={<Home/>} />
                     <Route path="/menu" element={<React.Suspense fallback={<Loader/>}>
                         <LazyMenu/>
                     </React.Suspense>}/>
@@ -29,7 +29,7 @@ const App = () => {
                         <LazyOffer/>
                     </React.Suspense>}/>
 
-
+                    <Route index={true} element={<Home />}   />
                 </Routes>
             </div>
             <Footer/>

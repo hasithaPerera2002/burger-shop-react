@@ -6,6 +6,7 @@ import OffersCard from "../components/cards/offersCard.tsx";
 import Loader from "./helpers/loader.tsx";
 import ServerErr from "./helpers/ServerErr.tsx";
 import axios from "axios";
+import NotFound from "./helpers/notFound.tsx";
 
 
 function Offers() {
@@ -21,7 +22,7 @@ function Offers() {
             try {
 
 
-                const response = await axios.get('http://localhost:8080/api/v1/burgers');
+                const response = await axios.get('https://localhost:3000/api/v1/burgers');
                 setBurgerList(response.data)
                 console.log(burgerList)
 
@@ -40,6 +41,7 @@ function Offers() {
         dispatch(secondary());
     }, [dispatch,]);
     if (loading) return <Loader/>
+    if(burgerList)return <NotFound/>
     if (fetchError) return <ServerErr/>
 
     return (

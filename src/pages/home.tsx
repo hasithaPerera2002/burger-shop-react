@@ -32,7 +32,7 @@ function Home() {
             opacity: 1,
             pathLength: 1,
             transition: {
-                duration: 7,
+                duration: 2.5,
                 ease: "easeInOut",
                 repeat: Infinity
 
@@ -80,7 +80,7 @@ function Home() {
                     whileInView={"animate"}
                     viewport={{
                         once: true,
-                        amount: 0.5
+                        amount: 0.2
                     }}
                     transition={{
                         staggerChildren: 0.4
@@ -218,7 +218,7 @@ function Home() {
                     }}
                     viewport={{
                         once: true,
-                        amount: 0.3
+                        amount: 0.1
                     }}
                     className={"mx-[10rem]  justify-center items-center flex h-[90vh]"}>
                     <motion.div
