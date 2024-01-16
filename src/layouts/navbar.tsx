@@ -2,6 +2,7 @@ import log2 from '../assets/macaron_4746242.png';
 import {useSelector} from "react-redux";
 import {RootState} from "../state/state.ts";
 import Links from "../components/links.tsx";
+import img from "../assets/delicious-cheeseburger.jpg"
 import RoundButton from "../components/roundButton.tsx";
 import {Link} from "react-router-dom";
 
@@ -9,6 +10,7 @@ import {Link} from "react-router-dom";
 
 function Navbar() {
     const selector = useSelector((state: RootState) => state.color.value);
+    const isLogged = useSelector((state:RootState)=>state.auth.isLoggedIn)
     console.log(selector);
     return (
         <>
@@ -29,15 +31,24 @@ function Navbar() {
                         <Links text={"offers"} where={"offers"}/>
                     </ul>
 
+                    {
+                        !isLogged ? (
+                            <div className="flex items-center  gap-4">
+                                <Link to={"signIn"} target={"_blank"}>
+                                    <RoundButton color={"tertiary"}  fontColor={"black"} text={"Sign In"}/></Link>
+                                <Link to={"signUp"} target={"_blank"}>
+                                    <RoundButton color={"secondary"}  fontColor={"black"}
+                                                 text={"Sign Up"}/>
+                                </Link>
+                            </div>
+                        ):(
+                            <div className="flex items-center rounded-3xl h-14 w-16  gap-4">
+                                <img src={img} className={"h-full rounded-full w-full object-cover "} alt=""/>
+                            </div>
+                        )
+                    }
 
-                    <div className="flex items-center  gap-4">
-                        <Link to={"signIn"} target={"_blank"}>
-                            <RoundButton color={"tertiary"}  fontColor={"black"} text={"Sign In"}/></Link>
-                        <Link to={"signUp"} target={"_blank"}>
-                            <RoundButton color={"secondary"}  fontColor={"black"}
-                                         text={"Sign Up"}/>
-                        </Link>
-                    </div>
+
                 </div>
             </div>
         </>

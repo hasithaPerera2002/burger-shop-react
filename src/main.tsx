@@ -9,6 +9,7 @@ import {Provider} from "react-redux";
 import SignIn from "./pages/signIn.tsx";
 import SignUp from "./pages/signUp.tsx";
 import Loader from "./pages/helpers/loader.tsx";
+import AdminLogin from "./pages/adminLogin.tsx";
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
@@ -24,6 +25,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                     <Route path={"/signUp"} element={<React.Suspense fallback={<Loader/>}>
                         <SignUp/>
                     </React.Suspense>}/>
+                    <Route path={'/admin/login'} element={<AdminLogin/>}/>
                 </Routes>
             </Provider>
         </BrowserRouter>

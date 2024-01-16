@@ -8,7 +8,7 @@ const initialState:ColorReducer =  {
   value: 'primary'
 }
 
-export const colorReducer = createSlice({
+export const colorSlice = createSlice({
     name: 'color',
     initialState,
     reducers: {
@@ -23,5 +23,5 @@ export const colorReducer = createSlice({
 
 });
 
-export const {primary, secondary} = colorReducer.actions;
-export default colorReducer.reducer;
+export const {primary, secondary} = colorSlice.actions;
+export default colorSlice.reducer;
