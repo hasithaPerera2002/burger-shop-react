@@ -49,7 +49,7 @@ function RoundButton({color, fontColor, height, width, text, onClick}: ButtonPro
             whileTap={{
                 scale: 0.9
             }}
-            className={`bg-${color} px-6 py-2 flex relative overflow-hidden min-h-10 min-w-16 items-center shadow h-[${height}] w-[${width}] rounded-2xl `}
+            className={`bg-${color}  px-6 py-2 flex relative overflow-hidden min-h-10 min-w-16 items-center shadow h-[${height}] w-[${width}] rounded-2xl `}
             onClick={onClick}>
 
 

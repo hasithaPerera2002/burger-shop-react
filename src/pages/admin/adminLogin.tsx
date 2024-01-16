@@ -21,7 +21,7 @@ function AdminLogin() {
         console.log(`Login clicked with username: ${username} and password: ${password}`);
         setPassword('')
         setUsername('')
-        navigate('/manage')
+        navigate('/admin/home')
     };
 
     return (
@@ -36,7 +36,7 @@ function AdminLogin() {
                     id="username"
                     value={username}
                     onChange={handleUsernameChange}
-                    required
+                    // required
                 />
                 <br/>
                 <label htmlFor="password">Password:</label>
@@ -47,7 +47,7 @@ function AdminLogin() {
                     id="password"
                     value={password}
                     onChange={handlePasswordChange}
-                    required
+                    // required
                 />
                 <br/>
                 <br/>
