@@ -1,9 +1,10 @@
 import img from '../../assets/white-burger-3.jpg';
 import RoundButton from "../../components/roundButton.tsx";
 import {useEffect, useState} from "react";
-import { BsTrash } from "react-icons/bs";
-import { MdOutlineModeEdit } from "react-icons/md";
+import {BsTrash} from "react-icons/bs";
+import {MdOutlineModeEdit} from "react-icons/md";
 import DeleteModal from "../helpers/deleteModal.tsx";
+import EditModal from "../helpers/editModal.tsx";
 
 
 interface Burger {
@@ -14,6 +15,7 @@ interface Burger {
     offered: boolean
     price: number
 }
+
 // const Modal = ({ isOpen, closeDeleteModal, children }) => {
 //     return (
 //         <div
@@ -38,9 +40,11 @@ function AdminHome() {
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [filteredBurgerList, setFilteredBurgerList] = useState<Burger[]>(burgerList);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
+    const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
     const [selectedBurger, setSelectedBurger] = useState<Burger>()
+    const [isUpdate, setIsUpdate] = useState<boolean>(true)
 
-    const openDeleteModal = (burger:Burger) => {
+    const openDeleteModal = (burger: Burger) => {
         setSelectedBurger(burger);
         setIsDeleteModalOpen(true);
     };
@@ -49,6 +53,13 @@ function AdminHome() {
 
         setIsDeleteModalOpen(false);
     };
+    const openEditModal = (burger: Burger) => {
+        setSelectedBurger(burger);
+        setIsEditModalOpen(true);
+    }
+    const closeEditModal = () => {
+        setIsEditModalOpen(false)
+    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -96,30 +107,31 @@ function AdminHome() {
             name: 'Silver',
             image: img,
             price: 2999,
-            offered:false,
+            offered: false,
             featured: true,
         }, {
             id: '01546545',
             name: 'Silver',
             image: img,
             price: 2999,
-            offered:false,
+            offered: false,
             featured: true,
         }, {
             id: '01546545',
             name: 'Silver',
             image: img,
             price: 2999,
-            offered:false,
+            offered: false,
             featured: true,
         }, {
             id: '01546545',
             name: 'huuu',
             image: img,
-            offered:true,
+            offered: true,
             price: 2999,
-            featured: true,},
-         {
+            featured: true,
+        },
+        {
             id: '01546545',
             name: 'anew',
             image: img,
@@ -218,11 +230,17 @@ function AdminHome() {
                                     </td>
                                     <td className="px-6 py-4">
                                         <div className={"flex gap-5 text-"} key={burger.id}>
-                                            <button className={"bg-red-500 rounded p-2"} onClick={() => openDeleteModal(burger)}  >
-                                                <BsTrash size={"1rem"} />
+                                            <button className={"bg-red-500 rounded p-2"}
+                                                    onClick={() => openDeleteModal(burger)}>
+                                                <BsTrash size={"1rem"}/>
                                             </button>
-                                            <button data-modal-target="popup-modal" data-modal-toggle="popup-modal" className={"bg-yellow-500 rounded p-2"} >
-                                                <MdOutlineModeEdit  size={"1rem"} />
+                                            <button data-modal-target="popup-modal" data-modal-toggle="popup-modal"
+                                                    className={"bg-yellow-500 rounded p-2"}
+                                                    onClick={() => {
+                                                        openEditModal(burger)
+                                                        setIsUpdate(true)
+                                                    }}>
+                                                <MdOutlineModeEdit size={"1rem"}/>
                                             </button>
 
                                         </div>
@@ -236,11 +254,129 @@ function AdminHome() {
                     </table>
                 </div>
             </div>
+            {/*models*/}
+
             <DeleteModal isOpen={isDeleteModalOpen} closeDeleteModal={closeDeleteModal}>
                 <h2 className="text-lg font-bold mb-2">Delete Burger</h2>
                 <p>Do you want to delete the burger with id {selectedBurger?.id}</p>
             </DeleteModal>
+            <EditModal isOpen={isEditModalOpen} closeEditModal={closeEditModal}>
+                <div className="max-w-md mx-auto">
+                    <form className="bg-white  shadow-md rounded px-5 pt-6 pb-8 mb-4">
+                        {isUpdate
+                            ?
+                            <div className={"p-2 text-2xl underline my-3 font-thin"}>Update Form</div>
+                            :
+                            <div className={"p-2 text-2xl underline my-3 font-thin"}>Add Item Form</div>
+                        }
+                        {isUpdate && <div className="m-4 px-4 text-center ">
+                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="id">
+                                id
+                            </label>
+                            <input type="text" className={"text-center"} value={selectedBurger?.id} readOnly/>
+                        </div>}
+                        <div className="m-4 px-4 text-center ">
+                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
+                                name
+                            </label>
+                            <input
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="name"
+                                type="text"
+                                placeholder="name"
+                                required
+                            />
+                        </div>
+                        <div className="m-4 px-4">
+                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="image">
+                                image
+                            </label>
+                            <input
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="image"
+                                type="file"
 
+                            />
+                        </div>
+                        <div className="m-4 px-4 text-center ">
+                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="featured">
+                                featured
+                            </label>
+                            <input
+                                className="mr-2 leading-tight focus:outline-none"
+                                id="featured-yes"
+                                type="radio"
+                                name="featured"
+                                value="yes"
+                                required
+                            />
+                            <label className="text-sm" htmlFor="featured-yes">
+                                Yes
+                            </label>
+                            <input
+                                className="ml-4 mr-2 leading-tight focus:outline-none"
+                                id="featured-no"
+                                type="radio"
+                                name="featured"
+                                value="no"
+                                required
+                            />
+                            <label className="text-sm" htmlFor="featured-no">
+                                No
+                            </label>
+                        </div>
+                        <div className="m-4 px-4 text-center ">
+                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="price">
+                                price
+                            </label>
+                            <input
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="price"
+                                type="number"
+                                placeholder="price"
+                                required
+                            />
+                        </div>
+                        <div className="m-4 px-4 text-center ">
+                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="offered">
+                                offered
+                            </label>
+                            <input
+                                className="mr-2 leading-tight focus:outline-none"
+                                id="offered-yes"
+                                type="radio"
+                                name="offered"
+                                value="yes"
+                                required
+                            />
+                            <label className="text-sm" htmlFor="offered-yes">
+                                Yes
+                            </label>
+                            <input
+                                className="ml-4 mr-2 leading-tight focus:outline-none"
+                                id="offered-no"
+                                type="radio"
+                                name="offered"
+                                value="no"
+                                required
+                            />
+                            <label className="text-sm" htmlFor="offered-no">
+                                No
+                            </label>
+                        </div>
+                        <div className="m-4 px-4">
+                            <button
+                                className={`w-full ${isUpdate ? 'bg-green-600 hover:bg-green-700' : 'bg-blue-600 hover:bg-blue-700'}  text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
+                                type="button"
+                            >
+                                {isUpdate ? ' Update Item':'Add Item'}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </EditModal>
+
+            {/*models end*/}
         </div>
     );
 
