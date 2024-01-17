@@ -354,7 +354,7 @@ function AdminHome() {
                             </label>
                             <input
                                 onChange={handleInputChange}
-                                value={selectedBurger?.image}
+
                                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 id="image"
                                 type="file"

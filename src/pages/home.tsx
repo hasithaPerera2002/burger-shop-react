@@ -126,32 +126,7 @@ function Home() {
                             stroke="#EDF2F4" stroke-opacity="0.5" stroke-width="5" stroke-linecap="round"
                             stroke-linejoin="round"/>
                     </svg>
-                    {/*hero image*/}
 
-
-                    {/*order button*/}
-
-                    {/*<div className={"top-[37rem]    left-[10rem] absolute"}>*/}
-                    {/*    <RoundButton color={"quinary "} fontColor={"tertiary"} text={"order now"}/>*/}
-
-                    {/*</div>*/}
-                    {/*<div className={"top-[36.5rem] flex left-[22rem] absolute"}>*/}
-                    {/*    <div className="w-[55px] flex justify-center items-center h-[55px] bg-zinc-300 rounded-full">*/}
-                    {/*        <img src={human} className={"rounded-full h-[50px] w-[50px]"} alt=""/>*/}
-                    {/*    </div>*/}
-                    {/*    <div*/}
-                    {/*        className="w-[55px] flex justify-center items-center h-[55px] bg-rose-400 -ml-8 rounded-full">*/}
-                    {/*        <img src={human} className={"rounded-full h-[50px] w-[50px]"} alt=""/>*/}
-                    {/*    </div>*/}
-                    {/*    <div*/}
-                    {/*        className="w-[55px] h-[55px] flex justify-center items-center bg-violet-400 -ml-8 rounded-full">*/}
-                    {/*        <img src={human} className={"rounded-full h-[50px] w-[50px]"} alt=""/>*/}
-                    {/*    </div>*/}
-                    {/*    <div*/}
-                    {/*        className="flex items-center justify-center w-14 h-14 bg-blue-400 -ml-8 rounded-full text-tertiary">*/}
-                    {/*        <p className="m-auto">100+</p>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
 
                 </motion.div>
             </section>
@@ -163,7 +138,7 @@ function Home() {
                     whileInView={"visible"}
                     viewport={{
                         once: true,
-                        amount: 0.5
+                        amount: 0.05
                     }}
                     transition={{
                         staggerChildren: 0.15
