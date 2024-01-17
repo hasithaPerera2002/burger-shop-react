@@ -1,10 +1,11 @@
 import img from '../../assets/white-burger-3.jpg';
 import RoundButton from "../../components/roundButton.tsx";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {BsTrash} from "react-icons/bs";
 import {MdOutlineModeEdit} from "react-icons/md";
-import DeleteModal from "../helpers/deleteModal.tsx";
 import EditModal from "../helpers/editModal.tsx";
+import axios from "axios";
+import Swal from 'sweetalert2'
 
 
 interface Burger {
@@ -38,21 +39,12 @@ function AdminHome() {
     const [burgerList, setBurgerList] = useState<Burger[]>([]);
 
     const [searchTerm, setSearchTerm] = useState<string>('');
-    const [filteredBurgerList, setFilteredBurgerList] = useState<Burger[]>(burgerList);
-    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
+    const [filteredBurgerList, setFilteredBurgerList] = useState<Burger[]>([]);
     const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
-    const [selectedBurger, setSelectedBurger] = useState<Burger>()
+    const [selectedBurger, setSelectedBurger] = useState<Burger | null>(null)
     const [isUpdate, setIsUpdate] = useState<boolean>(true)
 
-    const openDeleteModal = (burger: Burger) => {
-        setSelectedBurger(burger);
-        setIsDeleteModalOpen(true);
-    };
 
-    const closeDeleteModal = () => {
-
-        setIsDeleteModalOpen(false);
-    };
     const openEditModal = (burger: Burger) => {
         setSelectedBurger(burger);
         setIsEditModalOpen(true);
@@ -61,28 +53,61 @@ function AdminHome() {
         setIsEditModalOpen(false)
     }
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
+    const handleDeleteBtn = async () => {
+        console.log('called delete button')
+        try {
+            const response = await axios.delete(`http://localhost:3000/api/v1/burgers?id=${selectedBurger?.id}`);
+            if (response.status === 200) {
+                await fetchData()
 
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Burger deleted successfully',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+            } else {
 
-                // const response = await axios.get('http://localhost:3000/api/v1/burgers');
-                // setBurgerList(response.data.result)
-                // console.log(response.data.result)
-                // console.log(burgerList)
-
-            } catch (e) {
-                console.log('catched err')
-
-
+                await Swal.fire({
+                    title: 'Error!',
+                    text: 'Unexpected error occurred',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
             }
-
-
+        } catch (e) {
+            console.error('Error deleting burger:', e);
+            await Swal.fire({
+                title: 'Error!',
+                text: 'Failed to delete burger',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
         }
-        fetchData()
+
+    };
+    //data fetching method
+    const fetchData = useCallback(async () => {
+        try {
+
+
+            // const response = await axios.get('http://localhost:3000/api/v1/burgers');
+            // setBurgerList(response.data.result)
+            // console.log(response.data.result)
+            // console.log(burgerList)
+
+        } catch (e) {
+            console.log('catched err')
+        }
 
 
     }, []);
+    useEffect(() => {
+
+        fetchData()
+
+
+    }, [fetchData]);
 
     useEffect(() => {
         if (searchTerm.trim() === '') {
@@ -100,6 +125,7 @@ function AdminHome() {
     };
     useEffect(() => {
         setBurgerList((prevState) => [...prevState, ...tableData]);
+        setFilteredBurgerList(prevState => [...prevState, ...burgerList])
     }, []);
     const tableData: Burger[] = [
         {
@@ -231,7 +257,20 @@ function AdminHome() {
                                     <td className="px-6 py-4">
                                         <div className={"flex gap-5 text-"} key={burger.id}>
                                             <button className={"bg-red-500 rounded p-2"}
-                                                    onClick={() => openDeleteModal(burger)}>
+                                                    onClick={() => {
+                                                        setSelectedBurger(burger)
+                                                        Swal.fire({
+                                                            title: `Are you sure to delete ${burger.id}?`,
+                                                            text: "You won't be able to revert this!",
+                                                            icon: "warning",
+                                                            showCancelButton: true,
+                                                            confirmButtonColor: "#3085d6",
+                                                            cancelButtonColor: "#d33",
+                                                            confirmButtonText: "Yes, delete it!"
+                                                        }).then((result) => {
+                                                            if (result.isConfirmed) handleDeleteBtn();
+                                                        })
+                                                    }}>
                                                 <BsTrash size={"1rem"}/>
                                             </button>
                                             <button data-modal-target="popup-modal" data-modal-toggle="popup-modal"
@@ -256,10 +295,7 @@ function AdminHome() {
             </div>
             {/*models*/}
 
-            <DeleteModal isOpen={isDeleteModalOpen} closeDeleteModal={closeDeleteModal}>
-                <h2 className="text-lg font-bold mb-2">Delete Burger</h2>
-                <p>Do you want to delete the burger with id {selectedBurger?.id}</p>
-            </DeleteModal>
+
             <EditModal isOpen={isEditModalOpen} closeEditModal={closeEditModal}>
                 <div className="max-w-md mx-auto">
                     <form className="bg-white  shadow-md rounded px-5 pt-6 pb-8 mb-4">
@@ -369,7 +405,7 @@ function AdminHome() {
                                 className={`w-full ${isUpdate ? 'bg-green-600 hover:bg-green-700' : 'bg-blue-600 hover:bg-blue-700'}  text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
                                 type="button"
                             >
-                                {isUpdate ? ' Update Item':'Add Item'}
+                                {isUpdate ? ' Update Item' : 'Add Item'}
                             </button>
                         </div>
                     </form>
