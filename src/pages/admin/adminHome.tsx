@@ -17,23 +17,6 @@ interface Burger {
     price: number
 }
 
-// const Modal = ({ isOpen, closeDeleteModal, children }) => {
-//     return (
-//         <div
-//             className={`fixed inset-0 ${
-//                 isOpen ? 'flex' : 'hidden'
-//             } items-center justify-center`}
-//         >
-//             <div className="absolute bg-black opacity-75 inset-0" onClick={closeDeleteModal}></div>
-//             <div className="bg-white text-center p-4 rounded-md z-10">
-//                 {children}
-//                 <button className="mt-4 bg-red-600 text-center text-white p-2 rounded-md" onClick={closeDeleteModal}>
-//                     DELETE
-//                 </button>
-//             </div>
-//         </div>
-//     );
-// };
 
 function AdminHome() {
     const [burgerList, setBurgerList] = useState<Burger[]>([]);
@@ -41,7 +24,18 @@ function AdminHome() {
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [filteredBurgerList, setFilteredBurgerList] = useState<Burger[]>([]);
     const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
-    const [selectedBurger, setSelectedBurger] = useState<Burger | null>(null)
+    const [selectedBurger, setSelectedBurger] = useState<Burger >(
+        {
+            id: '',
+            name: '',
+            price:0,
+            featured:false,
+            image:'',
+            offered:false
+            
+        }
+        
+    )
     const [isUpdate, setIsUpdate] = useState<boolean>(true)
 
 
@@ -52,8 +46,18 @@ function AdminHome() {
     const closeEditModal = () => {
         setIsEditModalOpen(false)
     }
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const {name, value, type, checked, files} = e.target;
+
+
+        setSelectedBurger((prevData) => ({
+            ...prevData,
+            [name]: type === 'checkbox' ? checked : type !== 'file' ? value : files?.[0],
+        }));
+    };
 
     const handleDeleteBtn = async () => {
+
         console.log('called delete button')
         try {
             const response = await axios.delete(`http://localhost:3000/api/v1/burgers?id=${selectedBurger?.id}`);
@@ -102,31 +106,26 @@ function AdminHome() {
 
 
     }, []);
-    useEffect(() => {
-
-        fetchData()
-
-
-    }, [fetchData]);
-
-    useEffect(() => {
-        if (searchTerm.trim() === '') {
-            setFilteredBurgerList(burgerList);
-        } else {
-            const filteredList = burgerList.filter((burger) =>
-                burger.name.toLowerCase().includes(searchTerm.toLowerCase())
-            );
-            setFilteredBurgerList(filteredList);
-        }
-    }, [searchTerm, burgerList]);
 
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(event.target.value);
     };
-    useEffect(() => {
-        setBurgerList((prevState) => [...prevState, ...tableData]);
-        setFilteredBurgerList(prevState => [...prevState, ...burgerList])
-    }, []);
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (isUpdate) {
+            const response = await axios.put('http://localhost:3000/api/v1/burgers');
+            setBurgerList(response.data.result)
+            console.log(response.data.result)
+            console.log(burgerList)
+        } else {
+            const response = await axios.postForm('http://localhost:3000/api/v1/burgers');
+            setBurgerList(response.data.result)
+            console.log(response.data.result)
+            console.log(burgerList)
+        }
+    };
+
     const tableData: Burger[] = [
         {
             id: '01546545',
@@ -167,6 +166,26 @@ function AdminHome() {
         },
 
     ];
+
+    useEffect(() => {
+
+        fetchData()
+        setBurgerList((prevState) => [...prevState, ...tableData]);
+        setFilteredBurgerList(prevState => [...prevState, ...burgerList])
+
+
+    }, [fetchData]);
+
+    useEffect(() => {
+        if (searchTerm.trim() === '') {
+            setFilteredBurgerList(burgerList);
+        } else {
+            const filteredList = burgerList.filter((burger) =>
+                burger.name.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            setFilteredBurgerList(filteredList);
+        }
+    }, [searchTerm, burgerList]);
 
 
     return (
@@ -298,7 +317,7 @@ function AdminHome() {
 
             <EditModal isOpen={isEditModalOpen} closeEditModal={closeEditModal}>
                 <div className="max-w-md mx-auto">
-                    <form className="bg-white  shadow-md rounded px-5 pt-6 pb-8 mb-4">
+                    <form className="bg-white  shadow-md rounded px-5 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
                         {isUpdate
                             ?
                             <div className={"p-2 text-2xl underline my-3 font-thin"}>Update Form</div>
@@ -309,13 +328,17 @@ function AdminHome() {
                             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="id">
                                 id
                             </label>
-                            <input type="text" className={"text-center"} value={selectedBurger?.id} readOnly/>
+                            <input
+
+                                type="text" className={"text-center"} value={selectedBurger?.id} readOnly/>
                         </div>}
                         <div className="m-4 px-4 text-center ">
                             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
                                 name
                             </label>
                             <input
+                                onChange={handleInputChange}
+                                value={selectedBurger?.name}
                                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 id="name"
                                 type="text"
@@ -328,6 +351,8 @@ function AdminHome() {
                                 image
                             </label>
                             <input
+                                onChange={handleInputChange}
+                                value={selectedBurger?.image}
                                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 id="image"
                                 type="file"
@@ -339,6 +364,9 @@ function AdminHome() {
                                 featured
                             </label>
                             <input
+                                onChange={handleInputChange}
+                                checked={selectedBurger?.featured === true}
+
                                 className="mr-2 leading-tight focus:outline-none"
                                 id="featured-yes"
                                 type="radio"
@@ -350,6 +378,8 @@ function AdminHome() {
                                 Yes
                             </label>
                             <input
+                                onChange={handleInputChange}
+                                checked={selectedBurger?.featured === false}
                                 className="ml-4 mr-2 leading-tight focus:outline-none"
                                 id="featured-no"
                                 type="radio"
@@ -366,6 +396,8 @@ function AdminHome() {
                                 price
                             </label>
                             <input
+                                onChange={handleInputChange}
+                                value={selectedBurger?.price}
                                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 id="price"
                                 type="number"
@@ -378,6 +410,9 @@ function AdminHome() {
                                 offered
                             </label>
                             <input
+                                onChange={handleInputChange}
+                                checked={selectedBurger?.offered === true}
+
                                 className="mr-2 leading-tight focus:outline-none"
                                 id="offered-yes"
                                 type="radio"
@@ -389,6 +424,9 @@ function AdminHome() {
                                 Yes
                             </label>
                             <input
+                                onChange={handleInputChange}
+                                checked={selectedBurger?.offered === false}
+
                                 className="ml-4 mr-2 leading-tight focus:outline-none"
                                 id="offered-no"
                                 type="radio"
@@ -403,7 +441,7 @@ function AdminHome() {
                         <div className="m-4 px-4">
                             <button
                                 className={`w-full ${isUpdate ? 'bg-green-600 hover:bg-green-700' : 'bg-blue-600 hover:bg-blue-700'}  text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
-                                type="button"
+                                type="submit"
                             >
                                 {isUpdate ? ' Update Item' : 'Add Item'}
                             </button>
