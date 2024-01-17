@@ -114,11 +114,13 @@ function AdminHome() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (isUpdate) {
+            //todo :  do the implementation
             const response = await axios.put('http://localhost:3000/api/v1/burgers');
             setBurgerList(response.data.result)
             console.log(response.data.result)
             console.log(burgerList)
         } else {
+            //todo : do implementation here
             const response = await axios.postForm('http://localhost:3000/api/v1/burgers');
             setBurgerList(response.data.result)
             console.log(response.data.result)
