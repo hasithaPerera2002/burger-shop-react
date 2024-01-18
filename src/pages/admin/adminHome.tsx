@@ -1,14 +1,15 @@
 import img from '../../assets/white-burger-3.jpg';
 import RoundButton from "../../components/roundButton.tsx";
-import {useCallback, useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {BsTrash} from "react-icons/bs";
 import {MdOutlineModeEdit} from "react-icons/md";
 import EditModal from "../helpers/editModal.tsx";
-import axios from "axios";
+
 import Swal from 'sweetalert2'
+import {createBurger, deleteBurger, getAll, updateBurger} from "../../api/burgerHandler.ts";
 
 
-interface Burger {
+export interface Burger {
     id: string,
     name: string,
     image: string,
@@ -24,17 +25,16 @@ function AdminHome() {
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [filteredBurgerList, setFilteredBurgerList] = useState<Burger[]>([]);
     const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
-    const [selectedBurger, setSelectedBurger] = useState<Burger >(
+    const [selectedBurger, setSelectedBurger] = useState<Burger>(
         {
             id: '',
             name: '',
-            price:0,
-            featured:false,
-            image:'',
-            offered:false
-            
+            price: 0,
+            featured: false,
+            image: '',
+            offered: false
+
         }
-        
     )
     const [isUpdate, setIsUpdate] = useState<boolean>(true)
 
@@ -46,38 +46,39 @@ function AdminHome() {
     const closeEditModal = () => {
         setIsEditModalOpen(false)
     }
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const {name, value, type, checked, files} = e.target;
 
-
-        setSelectedBurger((prevData) => ({
-            ...prevData,
-            [name]: type === 'checkbox' ? checked : type !== 'file' ? value : files?.[0],
-        }));
-    };
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+        }
+    });
 
     const handleDeleteBtn = async () => {
 
         console.log('called delete button')
         try {
-            const response = await axios.delete(`http://localhost:3000/api/v1/burgers?id=${selectedBurger?.id}`);
+            const response = await deleteBurger(selectedBurger.id);
+
             if (response.status === 200) {
                 await fetchData()
 
-                Swal.fire({
-                    title: 'Success!',
-                    text: 'Burger deleted successfully',
-                    icon: 'success',
-                    confirmButtonText: 'OK'
-                });
+                await Toast.fire({
+                    icon: "success",
+                    title: `${selectedBurger.id} Deleted successfully`
+                })
             } else {
 
-                await Swal.fire({
-                    title: 'Error!',
-                    text: 'Unexpected error occurred',
-                    icon: 'error',
-                    confirmButtonText: 'OK'
-                });
+
+                await Toast.fire({
+                    icon: "error",
+                    title: `${selectedBurger.id}  delete failed`
+                })
             }
         } catch (e) {
             console.error('Error deleting burger:', e);
@@ -95,13 +96,19 @@ function AdminHome() {
         try {
 
 
-            // const response = await axios.get('http://localhost:3000/api/v1/burgers');
-            // setBurgerList(response.data.result)
-            // console.log(response.data.result)
-            // console.log(burgerList)
+            const response = await getAll();
+            setBurgerList(response.data.result)
+            console.log(response.data.result)
+            console.log(burgerList)
 
         } catch (e) {
             console.log('catched err')
+            await Swal.fire({
+                title: 'Error!',
+                text: `Failed to fetch data ${e}`,
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
         }
 
 
@@ -111,20 +118,75 @@ function AdminHome() {
         setSearchTerm(event.target.value);
     };
 
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const {name, value, type, checked, files} = e.target;
+        console.log(name, value, type, checked, files);
+
+        setSelectedBurger((prevData) => ({
+            ...prevData,
+            [name]: type === 'radio' ? value === 'true' : type !== 'file' ? value : files?.[0],
+        }));
+    };
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        console.log('handle submit called')
+        closeEditModal();
         if (isUpdate) {
-            //todo :  do the implementation
-            const response = await axios.put('http://localhost:3000/api/v1/burgers');
-            setBurgerList(response.data.result)
-            console.log(response.data.result)
-            console.log(burgerList)
+
+            try {
+                const response = await updateBurger(selectedBurger);
+                if (response.status === 200) {
+                    await fetchData()
+                    console.log(response.data.result)
+                    console.log(burgerList)
+                    await Toast.fire({
+                        icon: 'success',
+                        title: 'updated successfully'
+                    })
+                } else {
+                    await Toast.fire({
+                        icon: "error",
+                        title: `${selectedBurger.id}  update failed`
+                    })
+                }
+            } catch (e) {
+                console.log('caught err')
+                await Swal.fire({
+                    title: 'Error!',
+                    text: `Failed to update data ${e}`,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+
         } else {
-            //todo : do implementation here
-            const response = await axios.postForm('http://localhost:3000/api/v1/burgers');
-            setBurgerList(response.data.result)
-            console.log(response.data.result)
-            console.log(burgerList)
+            try {
+                const response = await createBurger(selectedBurger);
+                if (response.status === 200) {
+                    await fetchData()
+                    console.log(response.data.result)
+                    console.log(burgerList)
+                    await Toast.fire({
+                        icon: 'success',
+                        title: 'insert successfully'
+                    })
+                } else {
+                    await Toast.fire({
+                        icon: "error",
+                        title: `${selectedBurger.id}  insert failed`
+                    })
+                }
+            } catch (e) {
+                console.log('caught err')
+                await Swal.fire({
+                    title: 'Error!',
+                    text: `Failed to add data ${e}`,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+
         }
     };
 
@@ -331,7 +393,7 @@ function AdminHome() {
                                 id
                             </label>
                             <input
-
+                                name={"id"}
                                 type="text" className={"text-center"} value={selectedBurger?.id} readOnly/>
                         </div>}
                         <div className="m-4 px-4 text-center ">
@@ -343,6 +405,7 @@ function AdminHome() {
                                 value={selectedBurger?.name}
                                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 id="name"
+                                name={"name"}
                                 type="text"
                                 placeholder="name"
                                 required
@@ -353,11 +416,12 @@ function AdminHome() {
                                 image
                             </label>
                             <input
-                                onChange={handleInputChange}
 
+                                onChange={handleInputChange}
                                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 id="image"
                                 type="file"
+                                name={"image"}
 
                             />
                         </div>
@@ -366,27 +430,28 @@ function AdminHome() {
                                 featured
                             </label>
                             <input
-                                onChange={handleInputChange}
-                                checked={selectedBurger?.featured === true}
 
+                                checked={selectedBurger?.featured === true}
+                                onChange={handleInputChange}
                                 className="mr-2 leading-tight focus:outline-none"
                                 id="featured-yes"
                                 type="radio"
                                 name="featured"
-                                value="yes"
+                                value="true"
                                 required
                             />
                             <label className="text-sm" htmlFor="featured-yes">
                                 Yes
                             </label>
                             <input
-                                onChange={handleInputChange}
+
                                 checked={selectedBurger?.featured === false}
+                                onChange={handleInputChange}
                                 className="ml-4 mr-2 leading-tight focus:outline-none"
                                 id="featured-no"
                                 type="radio"
                                 name="featured"
-                                value="no"
+                                value={'false'}
                                 required
                             />
                             <label className="text-sm" htmlFor="featured-no">
@@ -402,6 +467,7 @@ function AdminHome() {
                                 value={selectedBurger?.price}
                                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 id="price"
+                                name={"price"}
                                 type="number"
                                 placeholder="price"
                                 required
@@ -412,28 +478,28 @@ function AdminHome() {
                                 offered
                             </label>
                             <input
-                                onChange={handleInputChange}
-                                checked={selectedBurger?.offered === true}
 
+                                checked={selectedBurger?.offered === true}
+                                onChange={handleInputChange}
                                 className="mr-2 leading-tight focus:outline-none"
                                 id="offered-yes"
                                 type="radio"
                                 name="offered"
-                                value="yes"
+                                value="true"
                                 required
                             />
                             <label className="text-sm" htmlFor="offered-yes">
                                 Yes
                             </label>
                             <input
-                                onChange={handleInputChange}
-                                checked={selectedBurger?.offered === false}
 
+                                checked={selectedBurger?.offered === false}
+                                onChange={handleInputChange}
                                 className="ml-4 mr-2 leading-tight focus:outline-none"
                                 id="offered-no"
                                 type="radio"
                                 name="offered"
-                                value="no"
+                                value="false"
                                 required
                             />
                             <label className="text-sm" htmlFor="offered-no">
