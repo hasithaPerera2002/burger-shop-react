@@ -34,9 +34,9 @@ const updateBurger =async (burger:Burger):Promise<AxiosResponse<any>>  => {
 
 
     const config = {
-        method: 'post',
+        method: "put",
         maxBodyLength: Infinity,
-        url: 'http://localhost:3000/api/v1/burgers',
+        url: 'http://localhost:3000/api/v1/burgers/'+burger._id,
         headers: {
             'Content-Type': 'multipart/form-data',
             'Authorization': 'Bearer YourAccessToken',

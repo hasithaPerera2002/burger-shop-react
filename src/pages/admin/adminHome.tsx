@@ -1,4 +1,3 @@
-import img from '../../assets/white-burger-3.jpg';
 import RoundButton from "../../components/roundButton.tsx";
 import React, {useCallback, useEffect, useState} from "react";
 import {BsTrash} from "react-icons/bs";
@@ -10,7 +9,7 @@ import {createBurger, deleteBurger, getAll, updateBurger} from "../../api/burger
 
 
 export interface Burger {
-    id: string,
+    _id: string,
     name: string,
     image: string,
     featured: boolean,
@@ -27,7 +26,7 @@ function AdminHome() {
     const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
     const [selectedBurger, setSelectedBurger] = useState<Burger>(
         {
-            id: '',
+            _id: '',
             name: '',
             price: 0,
             featured: false,
@@ -38,6 +37,9 @@ function AdminHome() {
     )
     const [isUpdate, setIsUpdate] = useState<boolean>(true)
 
+    const openAddModel = () => {
+        setIsEditModalOpen(true);
+    }
 
     const openEditModal = (burger: Burger) => {
         setSelectedBurger(burger);
@@ -63,21 +65,21 @@ function AdminHome() {
 
         console.log('called delete button')
         try {
-            const response = await deleteBurger(selectedBurger.id);
+            const response = await deleteBurger(selectedBurger._id);
 
             if (response.status === 200) {
                 await fetchData()
 
                 await Toast.fire({
                     icon: "success",
-                    title: `${selectedBurger.id} Deleted successfully`
+                    title: `${selectedBurger._id} Deleted successfully`
                 })
             } else {
 
 
                 await Toast.fire({
                     icon: "error",
-                    title: `${selectedBurger.id}  delete failed`
+                    title: `${selectedBurger._id}  delete failed`
                 })
             }
         } catch (e) {
@@ -147,7 +149,7 @@ function AdminHome() {
                 } else {
                     await Toast.fire({
                         icon: "error",
-                        title: `${selectedBurger.id}  update failed`
+                        title: `${selectedBurger._id}  update failed`
                     })
                 }
             } catch (e) {
@@ -174,7 +176,7 @@ function AdminHome() {
                 } else {
                     await Toast.fire({
                         icon: "error",
-                        title: `${selectedBurger.id}  insert failed`
+                        title: `${selectedBurger._id}  insert failed`
                     })
                 }
             } catch (e) {
@@ -190,51 +192,11 @@ function AdminHome() {
         }
     };
 
-    const tableData: Burger[] = [
-        {
-            id: '01546545',
-            name: 'Silver',
-            image: img,
-            price: 2999,
-            offered: false,
-            featured: true,
-        }, {
-            id: '01546545',
-            name: 'Silver',
-            image: img,
-            price: 2999,
-            offered: false,
-            featured: true,
-        }, {
-            id: '01546545',
-            name: 'Silver',
-            image: img,
-            price: 2999,
-            offered: false,
-            featured: true,
-        }, {
-            id: '01546545',
-            name: 'huuu',
-            image: img,
-            offered: true,
-            price: 2999,
-            featured: true,
-        },
-        {
-            id: '01546545',
-            name: 'anew',
-            image: img,
-            price: 2999,
-            offered: true,
-            featured: true,
-        },
 
-    ];
 
     useEffect(() => {
 
         fetchData()
-        setBurgerList((prevState) => [...prevState, ...tableData]);
         setFilteredBurgerList(prevState => [...prevState, ...burgerList])
 
 
@@ -258,7 +220,12 @@ function AdminHome() {
             <div className="mt-3 mx-6 mb-2  relative  h-[80vh] ">
                 <div className={"flex justify-between px-12 h-14 w-full"}>
                     <div>
-                        <RoundButton color={"red-400"} fontColor={"black"} text={"add new"}/>
+                        <RoundButton color={"red-400"} fontColor={"black"} text={"add new"} onClick={
+                            () => {
+                            openAddModel()
+                            setIsUpdate(false)
+
+                        }}/>
                     </div>
                     <div className={"flex gap-10 items-baseline"}>
                         <div className="relative ">
@@ -307,7 +274,7 @@ function AdminHome() {
                             filteredBurgerList.map((burger, index) => (
                                 <tr key={index} className=" border-b text-gray-900 ">
                                     <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap ">
-                                        {burger.id}
+                                        {burger._id}
                                     </th>
                                     <td className="px-6 py-4">
                                         {burger.name}
@@ -338,12 +305,12 @@ function AdminHome() {
                                         }
                                     </td>
                                     <td className="px-6 py-4">
-                                        <div className={"flex gap-5 text-"} key={burger.id}>
+                                        <div className={"flex gap-5 text-"} key={burger._id}>
                                             <button className={"bg-red-500 rounded p-2"}
                                                     onClick={() => {
                                                         setSelectedBurger(burger)
                                                         Swal.fire({
-                                                            title: `Are you sure to delete ${burger.id}?`,
+                                                            title: `Are you sure to delete ${burger._id}?`,
                                                             text: "You won't be able to revert this!",
                                                             icon: "warning",
                                                             showCancelButton: true,
@@ -394,7 +361,7 @@ function AdminHome() {
                             </label>
                             <input
                                 name={"id"}
-                                type="text" className={"text-center"} value={selectedBurger?.id} readOnly/>
+                                type="text" className={"text-center"} value={selectedBurger?._id} readOnly/>
                         </div>}
                         <div className="m-4 px-4 text-center ">
                             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
