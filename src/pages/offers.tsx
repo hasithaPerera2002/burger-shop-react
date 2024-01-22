@@ -8,13 +8,10 @@ import NotFound from "./helpers/notFound.tsx";
 import Navbar from "../layouts/navbar.tsx";
 import Footer from "../layouts/footer.tsx";
 import Burger from "../models/burger.ts";
-import {Navigate} from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import {getAllWithOffer} from "../api/burgerHandler.ts";
 
-const handleOnCLick = (burger: Burger) => {
-    Navigate({to:'/orders',state:burger});
 
-};
 function Offers() {
     document.title = "Offers";
 
@@ -22,7 +19,10 @@ function Offers() {
     const [burgerList, setBurgerList] = useState<Burger[]>([])
     const [loading, setLoading] = useState(true);
     const [fetchError, setFetchError] = useState(false);
-
+    const navigation =useNavigate();
+    const handleOnCLick = (burger: Burger) => {
+        navigation('/orders', {state:burger})
+    };
     useEffect(() => {
         const fetchData = async () => {
             try {

@@ -35,7 +35,7 @@ const App = () => {
                             <LazyOffer/>
                         </React.Suspense>}/>
                         <Route path={"/orders"} element={<React.Suspense fallback={<Loader/>}>
-                            <LazyOrder id={''} name={''} image={''} price={0} featured={false} description={''} category={''}/>
+                            <LazyOrder />
                         </React.Suspense>}/>
                     </Route>
 
