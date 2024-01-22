@@ -67,6 +67,15 @@ const getAll = async ():Promise<AxiosResponse<any>>  => {
     };
    return  await makeRequest(config)
 }
+const getAllWithOffer = async ():Promise<AxiosResponse<any>>  => {
+    const config = {
+        method: 'get',
+        maxBodyLength: Infinity,
+        url: 'http://localhost:3000/api/v1/burgers?offered=true',
+        headers: {}
+    };
+   return  await makeRequest(config)
+}
 
 async function makeRequest(config: AxiosRequestConfig):Promise<AxiosResponse<any>>  {
     try {
@@ -81,4 +90,4 @@ async function makeRequest(config: AxiosRequestConfig):Promise<AxiosResponse<any
     return Promise.resolve(undefined);
 }
 
-export { createBurger,updateBurger,deleteBurger,getAll};
+export { createBurger,updateBurger,deleteBurger,getAll,getAllWithOffer};

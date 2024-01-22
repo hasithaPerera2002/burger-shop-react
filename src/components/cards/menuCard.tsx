@@ -5,9 +5,10 @@ interface MenuCardProps {
     image:string,
     name:string,
     price:number,
+    onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-function MenuCard({image,name,price}:MenuCardProps) {
+function MenuCard({image,name,price,onClick}:MenuCardProps) {
     const imageVariant =  {
         initial: {
             scale: 1.01,
@@ -55,7 +56,7 @@ function MenuCard({image,name,price}:MenuCardProps) {
                animate={controls}>
                <img
 
-                   src={image} className={"object-cover scale-110 h-full "} alt=""/>
+                   src={image} className={"object-cover scale-110 h-full w-full"} alt=""/>
            </motion.div>
             <motion.div
                 variants={showVariant}
@@ -72,7 +73,7 @@ function MenuCard({image,name,price}:MenuCardProps) {
                 Rs {price}
             </motion.div>
             <div className={"h-24 bottom-0 absolute w-full flex items-center justify-center rounded-b-2xl  bg-primary"}>
-                <RoundButton color={"quinary"} fontColor={"white"} text={"order now"}/>
+                <RoundButton color={"quinary"} fontColor={"white"} onClick={onClick} text={"order now"}/>
             </div>
         </motion.div>
     );

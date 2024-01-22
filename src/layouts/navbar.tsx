@@ -34,7 +34,7 @@ function Navbar() {
                     {
                         !isLogged ? (
                             <div className="flex items-center  gap-4">
-                                <Link to={"signIn"} target={"_blank"}>
+                                <Link to={"signIn"} target={"_blank"} >
                                     <RoundButton color={"tertiary"}  fontColor={"black"} text={"Sign In"}/></Link>
                                 <Link to={"signUp"} target={"_blank"}>
                                     <RoundButton color={"secondary"}  fontColor={"black"}

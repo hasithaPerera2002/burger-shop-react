@@ -7,9 +7,10 @@ interface OfferCardsProps {
     name: string,
     offerPrice: number,
     offerText: string
+    onClick:(event:React.MouseEvent<HTMLButtonElement>)=>void
 }
 
-function OffersCard({image, name, offerPrice, offerText}: OfferCardsProps) {
+function OffersCard({image, name, offerPrice, offerText,onClick}: OfferCardsProps) {
     const imageVariant = {
         initial: {
             scale: 1.01,
@@ -63,7 +64,7 @@ function OffersCard({image, name, offerPrice, offerText}: OfferCardsProps) {
                            animate={controls}>
                     <img
 
-                        src={image} className={"object-cover scale-105 h-full "} alt=""/>
+                        src={image} className={"object-cover absolute scale-110 h-full w-full"} alt=""/>
                 </motion.div>
                 <motion.div
                     variants={showVariant}
@@ -89,7 +90,7 @@ function OffersCard({image, name, offerPrice, offerText}: OfferCardsProps) {
                 </motion.div>
                 <div
                     className={"h-24 bottom-0 absolute w-full flex items-center justify-center rounded-b-2xl  bg-primary"}>
-                    <RoundButton color={"quinary"} fontColor={"white"} text={"order now"}/>
+                    <RoundButton color={"quinary"} onClick={onClick} fontColor={"white"} text={"order now"}/>
                 </div>
             </motion.div>
         </>

@@ -1,5 +1,5 @@
 import {useDispatch} from "react-redux";
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import {primary} from "../state/colorReducer.ts";
 import heroVideo from "../assets/video-hero - Trim.mp4";
 import arrow from '../assets/arrow.png';
@@ -14,6 +14,8 @@ import cheeseBurger from "../assets/cheese-burger-2.jpg"
 import {motion,} from "framer-motion";
 import OfferCard from "../components/cards/offerCard.tsx";
 import SpecialCard from "../components/cards/specialCard.tsx";
+import Navbar from "../layouts/navbar.tsx";
+import Footer from "../layouts/footer.tsx";
 
 
 function Home() {
@@ -70,6 +72,7 @@ function Home() {
 
     return (
         <>
+            <Navbar/>
             <section className={"h-[100vh] relative bg-primary flex items-center  justify-center "}>
                 <video autoPlay loop muted className=" w-100 h-[120vh] object-fill z-0">
                     <source src={heroVideo} type="video/mp4"/>
@@ -317,7 +320,7 @@ function Home() {
                         fill="#EDF2F4" fillOpacity="0.5"/>
                 </svg>
             </section>
-
+            <Footer/>
         </>
     );
 }
