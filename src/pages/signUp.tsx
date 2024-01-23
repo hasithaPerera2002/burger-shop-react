@@ -13,6 +13,13 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {FaGoogle} from "react-icons/fa";
+import {addUser} from "../api/userHandler.ts";
+import {useState} from "react";
+import User from "../models/user.ts";
+import {useDispatch, } from "react-redux";
+import {login} from "../state/authReducer.ts";
+import {useNavigate} from "react-router-dom";
+import Swal from "sweetalert2";
 
 function Copyright(props: any) {
     return (
@@ -27,21 +34,77 @@ function Copyright(props: any) {
     );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
 export default function SignUp() {
     document.title="Sign Up";
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+
+    const [formData, setFormData] = useState<User>({
+        userName: '',
+        secondName:'',
+        email:'',
+        password:''
+    });
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         console.log({
             email: data.get('email'),
             password: data.get('password'),
         });
+        try{
+            const response = await addUser({
+                userName: formData.userName,
+                secondName: formData.secondName,
+                email: formData.email,
+                password: formData.password
+            });
+
+            if (response.status == 200) {
+                console.log('hi')
+                const payload = {
+                    token: 'someToken',
+                    role: 'someRole',
+                };
+
+                dispatch(login(payload));
+
+                await Swal.fire({
+                    title: 'Success!',
+                    text: 'Sign up success',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+                navigate('/home');
+            } else {
+                await Swal.fire({
+                    title: 'Error!',
+                    text: 'Failed signUp',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+        }catch (e) {
+            await Swal.fire({
+                title: 'Error!',
+                text: 'Failed to signUp '+e,
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        }
+
 
     };
 
+    const handleChange = (event:React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = event.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+    };
     return (
         <ThemeProvider theme={defaultTheme}>
             <Container component="main" maxWidth="xs">
@@ -65,12 +128,14 @@ export default function SignUp() {
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     autoComplete="given-name"
-                                    name="firstName"
+                                    name="userName"
                                     required
                                     fullWidth
                                     id="firstName"
                                     label="First Name"
                                     autoFocus
+                                    value={formData.userName}
+                                    onChange={handleChange}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -79,8 +144,10 @@ export default function SignUp() {
                                     fullWidth
                                     id="lastName"
                                     label="Last Name"
-                                    name="lastName"
+                                    name="secondName"
                                     autoComplete="family-name"
+                                    value={formData.secondName}
+                                    onChange={handleChange}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -91,6 +158,8 @@ export default function SignUp() {
                                     label="Email Address"
                                     name="email"
                                     autoComplete="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -102,6 +171,8 @@ export default function SignUp() {
                                     type="password"
                                     id="password"
                                     autoComplete="new-password"
+                                    value={formData.password}
+                                    onChange={handleChange}
                                 />
                             </Grid>
                             <Grid item xs={12}>

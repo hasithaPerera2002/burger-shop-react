@@ -12,7 +12,13 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {createTheme, ThemeProvider} from '@mui/material/styles';
+import {useState} from "react";
+import Swal from "sweetalert2";
+import {useDispatch} from "react-redux";
+import {useNavigate} from "react-router-dom";
+import { loginUser} from "../api/userHandler.ts";
+import {login} from "../state/authReducer.ts";
 
 function Copyright(props: any) {
     return (
@@ -31,20 +37,76 @@ function Copyright(props: any) {
 const defaultTheme = createTheme();
 
 export default function SignIn() {
-    document.title="Sign In";
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    document.title = "Sign In";
+    const [formData, setFormData] = useState(
+        {
+            email: '',
+            password: ''
+        }
+    )
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         console.log({
             email: data.get('email'),
             password: data.get('password'),
         });
+        try {
+            const response = await loginUser(
+                formData.email,
+                formData.password
+            );
+
+            if (response.status == 200) {
+                console.log('hi')
+                const payload = {
+                    token: 'someToken',
+                    role: 'someRole',
+                };
+
+                dispatch(login(payload));
+
+                await Swal.fire({
+                    title: 'Success!',
+                    text: 'Sign up success',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+                navigate('/home');
+            } else {
+                await Swal.fire({
+                    title: 'Error!',
+                    text: 'Failed signUp',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+        } catch (e) {
+            await Swal.fire({
+                title: 'Error!',
+                text: 'Failed to signUp ' + e,
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        }
+
+
+    };
+
+    const handleChange = (event:React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = event.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
     };
 
     return (
         <ThemeProvider theme={defaultTheme}>
-            <Grid container component="main" sx={{ height: '100vh' }}>
-                <CssBaseline />
+            <Grid container component="main" sx={{height: '100vh'}}>
+                <CssBaseline/>
                 <Grid
                     item
                     xs={false}
@@ -69,13 +131,13 @@ export default function SignIn() {
                             alignItems: 'center',
                         }}
                     >
-                        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                            <LockOutlinedIcon />
+                        <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
+                            <LockOutlinedIcon/>
                         </Avatar>
                         <Typography component="h1" variant="h5">
                             Sign in
                         </Typography>
-                        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+                        <Box component="form" noValidate onSubmit={handleSubmit} sx={{mt: 1}}>
                             <TextField
                                 margin="normal"
                                 required
@@ -85,6 +147,8 @@ export default function SignIn() {
                                 name="email"
                                 autoComplete="email"
                                 autoFocus
+                                value={formData.email}
+                                onChange={handleChange}
                             />
                             <TextField
                                 margin="normal"
@@ -95,16 +159,18 @@ export default function SignIn() {
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
+                                value={formData.password}
+                                onChange={handleChange}
                             />
                             <FormControlLabel
-                                control={<Checkbox value="remember" color="primary" />}
+                                control={<Checkbox value="remember" color="primary"/>}
                                 label="Remember me"
                             />
                             <Button
                                 type="submit"
                                 fullWidth
                                 variant="contained"
-                                sx={{ mt: 3, mb: 2 }}
+                                sx={{mt: 3, mb: 2}}
                             >
                                 Sign In
                             </Button>
@@ -120,7 +186,7 @@ export default function SignIn() {
                                     </Link>
                                 </Grid>
                             </Grid>
-                            <Copyright sx={{ mt: 5 }} />
+                            <Copyright sx={{mt: 5}}/>
                         </Box>
                     </Box>
                 </Grid>

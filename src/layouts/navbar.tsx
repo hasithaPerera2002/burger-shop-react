@@ -34,7 +34,7 @@ function Navbar() {
                     {
                         !isLogged ? (
                             <div className="flex items-center  gap-4">
-                                <NavLink  to={'/signIn'} target={"_blank"} >
+                                <NavLink  to={'/signIn'} target={"_parent"} >
                                     <RoundButton color={"tertiary"}  fontColor={"black"} text={"Sign In"}/></NavLink>
                                 <NavLink to={"/signUp"} target={"_parent"}>
                                     <RoundButton color={"secondary"}  fontColor={"black"}
