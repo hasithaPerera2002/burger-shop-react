@@ -4,7 +4,7 @@ import {RootState} from "../state/state.ts";
 import Links from "../components/links.tsx";
 import img from "../assets/delicious-cheeseburger.jpg"
 import RoundButton from "../components/roundButton.tsx";
-import {Link} from "react-router-dom";
+import { NavLink} from "react-router-dom";
 
 
 
@@ -34,12 +34,12 @@ function Navbar() {
                     {
                         !isLogged ? (
                             <div className="flex items-center  gap-4">
-                                <Link to={"signIn"} target={"_blank"} >
-                                    <RoundButton color={"tertiary"}  fontColor={"black"} text={"Sign In"}/></Link>
-                                <Link to={"signUp"} target={"_blank"}>
+                                <NavLink  to={'/signIn'} target={"_blank"} >
+                                    <RoundButton color={"tertiary"}  fontColor={"black"} text={"Sign In"}/></NavLink>
+                                <NavLink to={"/signUp"} target={"_parent"}>
                                     <RoundButton color={"secondary"}  fontColor={"black"}
                                                  text={"Sign Up"}/>
-                                </Link>
+                                </NavLink>
                             </div>
                         ):(
                             <div className="flex items-center rounded-3xl h-14 w-16  gap-4">

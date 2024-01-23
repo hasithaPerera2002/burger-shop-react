@@ -8,7 +8,7 @@ interface AuthReducer {
 
 const initialState: AuthReducer = {
     token: null,
-    isLoggedIn: true,
+    isLoggedIn: false,
     role:'user'
 }
 

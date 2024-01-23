@@ -23,7 +23,6 @@ const App = () => {
             <div className="overscroll-contain" onScroll={handleScroll}>
                 <Routes>
                     <Route path="/" element={<Navigate to="/home" replace={true}/>}/>
-                    <Route path="/*" element={<Navigate to="/home" replace={true}/>}/>
                     <Route path={"/home"} element={<React.Suspense fallback={<Loader/>}>
                         <Home/>
                     </React.Suspense>}/>

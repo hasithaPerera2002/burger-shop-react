@@ -3,14 +3,17 @@ import {FaCircleMinus, FaCirclePlus} from "react-icons/fa6";
 import log2 from "../assets/macaron_4746242.png";
 import RoundButton from "../components/roundButton.tsx";
 import {useState} from "react";
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
+import {makeOrder} from "../api/orderHandler.ts";
+import Swal from "sweetalert2";
 
 function Order() {
-    //TODO:implement the order added notifiaction and error notification
     document.title = "Order";
     const {state} = useLocation();
-    console.log(state);
     const burger: Burger = state;
+    const navigate = useNavigate();
+
+
 
     const [quantity, setQuantity] = useState<number>(1)
 
@@ -25,6 +28,48 @@ function Order() {
         setQuantity(quantity + 1)
     }
 
+    const btnOrderHandle = async () => {
+        console.log('btn order')
+       try {
+            const response = await makeOrder({
+                burger: burger.id,
+                userId: burger.id,
+                price: (burger.price * quantity),
+                quantity: quantity,
+                status: ''
+            });
+
+            if (response.status==200){
+                await Swal.fire({
+                    title: 'Success!',
+                    text: 'order added',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+            }else {
+                await Swal.fire({
+                    title: 'Error!',
+                    text: 'Failed to order burger',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+
+
+        }catch (e) {
+           console.error('Error deleting burger:', e);
+           await Swal.fire({
+               title: 'Error!',
+               text: 'Failed to order burger',
+               icon: 'error',
+               confirmButtonText: 'OK'
+           });
+       }finally {
+           navigate(-2);
+       }
+
+
+    };
     return (
         <div className={"bg-gray-300 min-h-[100vh] font-inter  w-full pt-10"}>
             <div className="mx-[10rem]">
@@ -86,7 +131,7 @@ function Order() {
                             </div>
                         </div>
                         <div className={"mt-7 ml-[5rem]"}>
-                            <RoundButton color={"quinary"} fontColor={"white"} text={"order"}/>
+                            <RoundButton color={"quinary"} fontColor={"white"} text={"order"} onClick={btnOrderHandle}/>
                         </div>
                     </div>
                     <div className={"w-3/5 h-[80vh]   mr-3 pt-5"}>
