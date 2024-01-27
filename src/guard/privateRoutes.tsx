@@ -7,7 +7,7 @@ function PrivateRoutes() {
     const auth = useSelector((state:RootState) =>  state.auth.isLoggedIn);
 
     return (
-       auth?<Outlet/> :<Navigate to={"/signIn"}/>
+       auth?<Outlet/> :<Navigate to={"/signIn"}  replace={true}/>
     );
 }
 

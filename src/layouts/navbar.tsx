@@ -2,7 +2,7 @@ import log2 from '../assets/macaron_4746242.png';
 import {useSelector} from "react-redux";
 import {RootState} from "../state/state.ts";
 import Links from "../components/links.tsx";
-import img from "../assets/delicious-cheeseburger.jpg"
+import img from "../assets/832.jpg"
 import RoundButton from "../components/roundButton.tsx";
 import { NavLink} from "react-router-dom";
 
@@ -43,7 +43,7 @@ function Navbar() {
                             </div>
                         ):(
                             <div className="flex items-center rounded-3xl h-14 w-16  gap-4">
-                                <img src={img} className={"h-full rounded-full w-full object-cover "} alt=""/>
+                                <img src={img} className={"h-full rounded-full  object-cover "} alt=""/>
                             </div>
                         )
                     }

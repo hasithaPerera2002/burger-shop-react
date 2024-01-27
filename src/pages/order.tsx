@@ -7,7 +7,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {makeOrder} from "../api/orderHandler.ts";
 import Swal from "sweetalert2";
 
-function Order() {
+export  function Order() {
     document.title = "Order";
     const {state} = useLocation();
     const burger: Burger = state;
@@ -150,4 +150,3 @@ function Order() {
     );
 }
 
-export default Order;

@@ -18,7 +18,8 @@ import Swal from "sweetalert2";
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import { loginUser} from "../api/userHandler.ts";
-import {login} from "../state/authReducer.ts";
+import {login, logout} from "../state/authReducer.ts";
+import axios from "axios";
 
 function Copyright(props: any) {
     return (
@@ -60,7 +61,7 @@ export default function SignIn() {
             );
 
             if (response.status == 200) {
-                console.log('hi')
+                console.log(response.data.result)
                 const payload = {
                     token: 'someToken',
                     role: 'someRole',
@@ -76,20 +77,33 @@ export default function SignIn() {
                 });
                 navigate('/home');
             } else {
+                dispatch(logout());
                 await Swal.fire({
                     title: 'Error!',
-                    text: 'Failed signUp',
+                    text: 'Failed signUp | check input values',
                     icon: 'error',
                     confirmButtonText: 'OK'
                 });
             }
         } catch (e) {
-            await Swal.fire({
-                title: 'Error!',
-                text: 'Failed to signUp ' + e,
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
+            if (axios.isAxiosError(e)) {
+                // Axios error with a response
+                await Swal.fire({
+                    title: 'Error!',
+                    text: 'Failed to signUp ' + e.response?.data?.message || 'Unknown error',
+                    icon: 'error',
+                    confirmButtonText: 'OK',
+                });
+            } else {
+                // Non-Axios error
+                console.error('Non-Axios error:');
+                await Swal.fire({
+                    title: 'Error!',
+                    text: 'Check input values',
+                    icon: 'error',
+                    confirmButtonText: 'OK',
+                });
+            }
         }
 
 
