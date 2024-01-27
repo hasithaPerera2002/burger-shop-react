@@ -43,3 +43,16 @@ src: Contains the React source code for your Burger Shop application.
 public: Public assets and HTML file.
 Feel free to explore and modify the code to suit your needs. Happy coding!
 
+![image](https://github.com/hasithaPerera2002/burger-shop-react/assets/68593358/5e26d416-b400-431f-a0c6-445a4815c6f6)
+
+![image](https://github.com/hasithaPerera2002/burger-shop-react/assets/68593358/6aba6f61-4132-41dd-b233-0c2cde4c6100)
+
+![image](https://github.com/hasithaPerera2002/burger-shop-react/assets/68593358/10581cee-bf6b-46bb-99b8-db863e5b0d5b)
+
+![image](https://github.com/hasithaPerera2002/burger-shop-react/assets/68593358/b0367981-36eb-4786-a349-8036dfc527a3)
+
+![image](https://github.com/hasithaPerera2002/burger-shop-react/assets/68593358/f73d7faa-89be-4d11-999d-53759f09807d)
+
+![image](https://github.com/hasithaPerera2002/burger-shop-react/assets/68593358/2bd2e9fa-c7e0-4c88-90c9-5af957d4f065)
+
+![image](https://github.com/hasithaPerera2002/burger-shop-react/assets/68593358/91f0934b-a5ac-437c-a6ed-bc067a98adb1)
