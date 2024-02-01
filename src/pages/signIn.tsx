@@ -41,6 +41,8 @@ export default function SignIn() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     document.title = "Sign In";
+    const [loading, setLoading] = useState(false);
+
     const [formData, setFormData] = useState(
         {
             email: '',
@@ -49,6 +51,7 @@ export default function SignIn() {
     )
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        setLoading(true);
         const data = new FormData(event.currentTarget);
         console.log({
             email: data.get('email'),
@@ -104,6 +107,8 @@ export default function SignIn() {
                     confirmButtonText: 'OK',
                 });
             }
+        }finally {
+            setLoading(false);
         }
 
 
@@ -180,13 +185,15 @@ export default function SignIn() {
                                 control={<Checkbox value="remember" color="primary"/>}
                                 label="Remember me"
                             />
+                            {loading  }
                             <Button
                                 type="submit"
                                 fullWidth
                                 variant="contained"
                                 sx={{mt: 3, mb: 2}}
+                                disabled={loading}
                             >
-                                Sign In
+                                {loading ? 'Sign In...' : 'Sign In'}
                             </Button>
                             <Grid container>
                                 <Grid item xs>
