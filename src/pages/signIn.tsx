@@ -62,6 +62,7 @@ export default function SignIn() {
                 formData.email,
                 formData.password
             );
+            console.log(response);
 
             if (response.status == 200) {
                 console.log(response.data.result)
