@@ -25,10 +25,10 @@ const addUser = async (user:User):Promise<AxiosResponse<any>> => {
 }
 const loginUser = async (email:string,password:string):Promise<AxiosResponse<any>> => {
 
-    let data = new FormData();
-
-    data.append('email', email);
-    data.append('password', password);
+    let data = JSON.stringify({
+        "email": email,
+        "password": password
+    });
 
     const config = {
         method: 'post',
