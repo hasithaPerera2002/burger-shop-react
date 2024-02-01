@@ -2,7 +2,6 @@ import {useEffect, useState} from "react";
 
 
 import MenuCard from "../components/cards/menuCard.tsx";
-import axios from "axios";
 import ServerErr from "./helpers/ServerErr.tsx";
 import Loader from "./helpers/loader.tsx";
 import {useDispatch} from "react-redux";
@@ -12,6 +11,7 @@ import Navbar from "../layouts/navbar.tsx";
 import Footer from "../layouts/footer.tsx";
 import { useNavigate, } from "react-router-dom";
 import Burger from "../models/burger.ts";
+import {getAll} from "../api/burgerHandler.ts";
 
 
 
@@ -29,7 +29,7 @@ function Menu() {
             try {
 
 
-                const response = await axios.get('http://localhost:3000/api/v1/burgers');
+                const response = await getAll();
                 setBurgerList(response.data.result)
                 console.log(response.data.result)
                 console.log(burgerList)
