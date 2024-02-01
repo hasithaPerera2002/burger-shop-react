@@ -44,11 +44,11 @@ const loginUser = async (email:string,password:string):Promise<AxiosResponse<any
 async function makeRequest(config:AxiosRequestConfig):Promise<AxiosResponse<any>> {
     try {
         const response = await axios.request(config);
-        console.log(JSON.stringify(response.data));
+        console.log(JSON.stringify(response.data),"response success");
         return  response;
     }
     catch (error) {
-        console.log(error);
+        console.log(error,"response error");
     }
     // @ts-ignore
 
