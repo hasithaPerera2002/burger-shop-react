@@ -5,16 +5,17 @@ import User from "../models/user.ts";
 
 const addUser = async (user:User):Promise<AxiosResponse<any>> => {
 
-    let data = new FormData();
-    data.append('userName', user.userName);
-    data.append('secondName', user.secondName);
-    data.append('email', user.email);
-    data.append('password', user.password);
+    let data = JSON.stringify({
+        "userName": user.userName,
+        "secondName": user.secondName,
+        "email": user.email,
+        "password": user.password
+    });
 
     const config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'http://localhost:3000/api/v1/users',
+        url:  'https://burger-shop-backend-hasitha-1.onrender.com/api/v1/users',
         headers: {
             'Content-Type': 'application/json'
         },
