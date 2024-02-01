@@ -17,6 +17,7 @@ import {getAll} from "../api/burgerHandler.ts";
 
 function Menu() {
     document.title = "Menu";
+
     const dispatch = useDispatch();
     const [burgerList, setBurgerList] = useState<Burger[]>([])
     const [loading, setLoading] = useState(true);
