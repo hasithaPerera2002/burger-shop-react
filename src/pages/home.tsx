@@ -1,5 +1,5 @@
 import {useDispatch} from "react-redux";
-import React, {useEffect} from "react";
+import  {useEffect} from "react";
 import {primary} from "../state/colorReducer.ts";
 import heroVideo from "../assets/video-hero - Trim.mp4";
 import arrow from '../assets/arrow.png';
@@ -167,8 +167,6 @@ function Home() {
                                 src={sandwich2} className={"object-cover rounded-full ms-2 h-36 w-36"} alt=""/>
                         </div>
                     </div>
-
-
                 </motion.div>
                 <motion.div
                     initial={"hidden"}
@@ -271,7 +269,6 @@ function Home() {
                         variants={pathVariants}
                         initial={"hidden"}
                         animate={"visible"}
-
                         d="M202.738 163.001L220.527 106.473C221.564 103.178 223.229 100.151 225.428 97.5658C227.626 94.9805 230.314 92.887 233.339 91.4049L234.653 90.7609C240.412 87.9374 247.113 87.633 253.282 89.9148C259.452 92.1965 264.585 96.8773 267.551 102.928C270.517 108.978 271.075 115.902 269.1 122.177C267.125 128.451 262.781 133.563 257.022 136.386L83.3122 221.553C77.5534 224.377 70.8521 224.681 64.6824 222.399C58.5128 220.117 53.3802 215.437 50.4139 209.386C47.4475 203.336 46.8904 196.412 48.865 190.137C50.8395 183.863 55.1841 178.751 60.943 175.928L109.962 151.895C127.236 143.427 147.336 142.513 165.842 149.356L202.738 163.001ZM72.4554 226.876L267.879 131.063L279.063 153.876C283.513 162.951 284.349 173.337 281.387 182.749C278.425 192.161 271.908 199.828 263.27 204.063L132.988 267.939C124.349 272.174 114.297 272.63 105.043 269.208C95.7884 265.785 88.0896 258.764 83.64 249.689L72.4554 226.876Z"
                         stroke="#EDF2F4" stroke-opacity="0.5" stroke-width="5" stroke-linecap="round"
                         stroke-linejoin="round"/>
