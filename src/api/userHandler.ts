@@ -32,7 +32,7 @@ const loginUser = async (email:string,password:string):Promise<AxiosResponse<any
     const config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'http://localhost:3000/api/v1/users/login',
+        url: 'https://burger-shop-backend-hasitha-1.onrender.com/api/v1/users/login',
         headers: {
             'Content-Type': 'application/json'
         },
