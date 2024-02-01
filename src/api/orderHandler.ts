@@ -15,7 +15,7 @@ const makeOrder = async (order:Order):Promise<AxiosResponse<any>> =>{
     const config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'https://burger-shop-backend-hasitha-1.onrender.com/api/v1/orders',
+        url: 'https://burger-shop-backend-hasitha-1.onrender.com:3000/api/v1/orders',
         headers: {
             'Content-Type': 'application/json'
         },
