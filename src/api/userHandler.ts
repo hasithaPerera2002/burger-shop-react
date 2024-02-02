@@ -29,15 +29,16 @@ const loginUser = async (email:string,password:string):Promise<AxiosResponse<any
         "email": email,
         "password": password
     });
+    console.log(data,"data")
 
-    const config = {
+    let config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'https://burger-shop-backend-hasitha-1.onrender.com:3000/api/v1/users/login',
+        url: 'https://burger-shop-backend-hasitha-1.onrender.com/api/v1/users/login',
         headers: {
             'Content-Type': 'application/json'
         },
-        data: data
+        data : data
     };
     return await makeRequest(config)
 }

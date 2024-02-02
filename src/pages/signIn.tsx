@@ -59,7 +59,7 @@ export default function SignIn() {
         });
         try {
             const response = await loginUser(
-                formData.email,
+                formData.email, 
                 formData.password
             );
             console.log(response);
