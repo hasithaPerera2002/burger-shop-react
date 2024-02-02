@@ -62,9 +62,10 @@ const getAll = async ():Promise<AxiosResponse<any>>  => {
     const config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: 'https://burger-shop-backend-hasitha-1.onrender.com:3000/api/v1/burgers',
-        headers: {}
+        url: 'https://burger-shop-backend-hasitha-1.onrender.com/api/v1/burgers',
+        headers: { }
     };
+    console.log(config,"config")
    return  await makeRequest(config)
 }
 const getAllWithOffer = async ():Promise<AxiosResponse<any>>  => {
