@@ -64,7 +64,7 @@ const getAll = async ():Promise<AxiosResponse<any>>  => {
         maxBodyLength: Infinity,
         url: 'https://burger-shop-backend-hasitha-1.onrender.com/api/v1/burgers',
         headers: { },
-        withCredentials: true,
+
     };
     console.log(config,"config")
    return  await makeRequest(config)
