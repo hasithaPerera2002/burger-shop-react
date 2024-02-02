@@ -29,7 +29,7 @@ export function Order() {
     }
 
     const btnOrderHandle = async () => {
-        console.log('btn order')
+        console.log('btn order',burger.id)
        try {
             const response = await makeOrder({
                 burger: burger.id,
@@ -105,10 +105,7 @@ export function Order() {
                                     <div>itemName :</div>
                                     <div>{burger.name}</div>
                                 </div>
-                                <div className={"flex px-2 py-2  gap-[1rem]"}>
-                                    <div>description :</div>
-                                    <div>{burger.description}</div>
-                                </div>
+
                                 <div className={"flex px-2  gap-[1rem]"}>
                                     <div>quantity :</div>
                                     <div className={"flex gap-2"}>

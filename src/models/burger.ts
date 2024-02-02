@@ -4,6 +4,5 @@ export default interface Burger {
     image: string,
     price: number,
     featured: boolean,
-    description: string,
-    category: string
+
 }
