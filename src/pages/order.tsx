@@ -29,11 +29,11 @@ export function Order() {
     }
 
     const btnOrderHandle = async () => {
-        console.log('btn order',burger.id)
+        console.log('btn order',burger._id)
        try {
             const response = await makeOrder({
-                burger: burger.id,
-                userId: burger.id,
+                burger: burger._id,
+                userId: burger._id,
                 price: (burger.price * quantity),
                 quantity: quantity,
                 status: ''

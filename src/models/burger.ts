@@ -1,5 +1,5 @@
 export default interface Burger {
-    id: string,
+    _id: string,
     name: string,
     image: string,
     price: number,
