@@ -4,6 +4,7 @@ import Order from "../models/order.ts";
 /* eslint-disable */
 
 const makeOrder = async (order:Order):Promise<AxiosResponse<any>> =>{
+    console.log(order,"order")
     const data = JSON.stringify({
         "userId": order.userId,
         "burgerId": order.burger,
