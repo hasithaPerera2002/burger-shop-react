@@ -35,11 +35,11 @@ function Menu() {
                       return  setFetchError(false);
                     }
                     setBurgerList(response.data.result)
-                    console.log(response.data.result)
+                    console.log(response.data.result, 'response')
                     console.log(burgerList)
     
                 } catch (e) {
-                    console.log('catched err')
+                    console.log('catched err',e)
                     setFetchError(true);
     
     

@@ -63,7 +63,8 @@ const getAll = async ():Promise<AxiosResponse<any>>  => {
         method: 'get',
         maxBodyLength: Infinity,
         url: 'https://burger-shop-backend-hasitha-1.onrender.com/api/v1/burgers',
-        headers: { }
+        headers: { },
+        withCredentials: true,
     };
     console.log(config,"config")
    return  await makeRequest(config)
@@ -85,7 +86,7 @@ async function makeRequest(config: AxiosRequestConfig):Promise<AxiosResponse<any
         return response;
     }
     catch (error) {
-        console.log(error);
+        console.log(error,"response error");
     }
     // @ts-ignore
     return Promise.resolve(undefined);
