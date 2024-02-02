@@ -29,7 +29,7 @@ export function Order() {
     }
 
     const btnOrderHandle = async () => {
-        console.log('btn order',burger._id)
+
        try {
             const response = await makeOrder({
                 burger: burger._id,

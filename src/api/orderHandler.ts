@@ -6,10 +6,10 @@ import Order from "../models/order.ts";
 const makeOrder = async (order:Order):Promise<AxiosResponse<any>> =>{
     console.log(order,"order")
     const data = JSON.stringify({
-        "userId": order.userId,
-        "burgerId": order.burger,
-        "quantity": order.quantity,
-        "price": order.price,
+        "userId": "65a1868756415c430c0ef021",
+        "burgerId": "65a13c4db7d1b34d24fa689f",
+        "quantity": 2,
+        "price": 2000,
         "status": "Pending"
     });
 
