@@ -26,33 +26,36 @@ function Menu() {
     useEffect(() => {
         setLoading(true)
         dispatch(secondary())
-        const fetchData = async () => {
-            try {
-
-
-                const response = await getAll();
-                setBurgerList(response.data.result)
-                console.log(response.data.result)
-                console.log(burgerList)
-
-            } catch (e) {
-                console.log('catched err')
-                setFetchError(true);
-
-
-            } finally {
-                setLoading(false)
+            const fetchData = async () => {
+                try {
+    
+    
+                    const response = await getAll();
+                    if (response.data === undefined){
+                      return  setFetchError(false);
+                    }
+                    setBurgerList(response.data.result)
+                    console.log(response.data.result)
+                    console.log(burgerList)
+    
+                } catch (e) {
+                    console.log('catched err')
+                    setFetchError(true);
+    
+    
+                } finally {
+                    setLoading(false)
+                }
+    
             }
-
-        }
-
-        fetchData();
-
-    }, []);
-
-    if (loading) return <Loader/>
-    if (!burgerList) return <NotFound/>
-    if (fetchError) return <ServerErr/>
+    
+            fetchData();
+    
+        }, []);
+    
+        if (loading) return <Loader/>
+        if (!burgerList) return <NotFound/>
+        if (fetchError) return <ServerErr/>
 
 
     const handleOnClick = (burger: Burger) => {

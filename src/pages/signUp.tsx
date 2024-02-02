@@ -45,10 +45,54 @@ export default function SignUp() {
         email:'',
         password:''
     });
+    const [errors, setErrors] = useState<{ [key in keyof User]: string }>({
+        userName: '',
+        secondName: '',
+        email: '',
+        password: ''
+    });
+
+    const validateForm = () => {
+        let valid = true;
+        const newErrors: { [key in keyof User]: string } = { userName: '', secondName: '', email: '', password: '' };
+
+
+        if (!formData.userName.trim()) {
+            newErrors.userName = 'Username is required';
+            valid = false;
+        }
+
+
+        if (!formData.secondName.trim()) {
+            newErrors.secondName = 'Second Name is required';
+            valid = false;
+        }
+
+        if (!formData.email.trim()) {
+            newErrors.email = 'Email is required';
+            valid = false;
+        } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+            newErrors.email = 'Invalid email format';
+            valid = false;
+        }
+
+
+        if (!formData.password.trim()) {
+            newErrors.password = 'Password is required';
+            valid = false;
+        }
+
+        setErrors(newErrors);
+        return valid;
+    };
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        if (!validateForm()) {
+            return;
+        }
         const data = new FormData(event.currentTarget);
         console.log({
             email: data.get('email'),
@@ -137,6 +181,7 @@ export default function SignUp() {
                                     value={formData.userName}
                                     onChange={handleChange}
                                 />
+                                <span style={{ color: 'red' }}>{errors.userName}</span>
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <TextField
@@ -149,6 +194,7 @@ export default function SignUp() {
                                     value={formData.secondName}
                                     onChange={handleChange}
                                 />
+                                <span style={{ color: 'red' }}>{errors.secondName}</span>
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
@@ -161,6 +207,7 @@ export default function SignUp() {
                                     value={formData.email}
                                     onChange={handleChange}
                                 />
+                                <span style={{ color: 'red' }}>{errors.email}</span>
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
@@ -174,6 +221,7 @@ export default function SignUp() {
                                     value={formData.password}
                                     onChange={handleChange}
                                 />
+                                <span style={{ color: 'red' }}>{errors.password}</span>
                             </Grid>
                             <Grid item xs={12}>
                                 <FormControlLabel

@@ -59,7 +59,7 @@ export default function SignIn() {
         });
         try {
             const response = await loginUser(
-                formData.email, 
+                formData.email,
                 formData.password
             );
             console.log(response);
@@ -84,7 +84,7 @@ export default function SignIn() {
                 dispatch(logout());
                 await Swal.fire({
                     title: 'Error!',
-                    text: 'Failed signUp | check input values',
+                    text: response.data.message,
                     icon: 'error',
                     confirmButtonText: 'OK'
                 });
