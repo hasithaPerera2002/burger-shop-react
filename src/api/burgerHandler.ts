@@ -66,7 +66,7 @@ const getAll = async ():Promise<AxiosResponse<any>>  => {
         headers: { },
 
     };
-    console.log(config,"config")
+
    return  await makeRequest(config)
 }
 const getAllWithOffer = async ():Promise<AxiosResponse<any>>  => {
@@ -82,14 +82,14 @@ const getAllWithOffer = async ():Promise<AxiosResponse<any>>  => {
 async function makeRequest(config: AxiosRequestConfig):Promise<AxiosResponse<any>>  {
     try {
         const response = await axios.request(config);
-        console.log(JSON.stringify(response.data));
+
         return response;
     }
     catch (error) {
-        console.log(error,"response error");
+        // @ts-ignore
+        throw new Error(error.message)
     }
     // @ts-ignore
-    return Promise.resolve(undefined);
 }
 
 export { createBurger,updateBurger,deleteBurger,getAll,getAllWithOffer};

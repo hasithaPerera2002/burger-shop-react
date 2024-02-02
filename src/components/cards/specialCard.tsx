@@ -32,7 +32,7 @@ function SpecialCard({
                          list2,
                          list3,
                      }: SpecialProps) {
-    console.log(ml)
+
     return (
         <div className={`h-[${height}vh] border-opacity-20 border-black shadow z-[1] w-[${width}rem] overflow-hidden relative`}>
             <div

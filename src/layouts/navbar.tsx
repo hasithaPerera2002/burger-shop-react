@@ -11,7 +11,7 @@ import { NavLink} from "react-router-dom";
 function Navbar() {
     const selector = useSelector((state: RootState) => state.color.value);
     const isLogged = useSelector((state:RootState)=>state.auth.isLoggedIn)
-    console.log(selector);
+
     return (
         <>
             <div className=" backdrop-blur w-full shadow-card z-20 fixed top-0 h-16">

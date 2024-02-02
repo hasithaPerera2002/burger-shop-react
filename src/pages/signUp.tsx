@@ -93,11 +93,8 @@ export default function SignUp() {
         if (!validateForm()) {
             return;
         }
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+
+
         try{
             const response = await addUser({
                 userName: formData.userName,
@@ -107,7 +104,7 @@ export default function SignUp() {
             });
 
             if (response.status == 200) {
-                console.log('hi')
+
                 const payload = {
                     token: 'someToken',
                     role: 'someRole',

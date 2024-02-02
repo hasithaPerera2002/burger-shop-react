@@ -53,19 +53,16 @@ export default function SignIn() {
         event.preventDefault();
         setLoading(true);
         const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+
         try {
             const response = await loginUser(
                 formData.email,
                 formData.password
             );
-            console.log(response);
+            ;
 
             if (response.status == 200) {
-                console.log(response.data.result)
+
                 const payload = {
                     token: 'someToken',
                     role: 'someRole',
@@ -100,7 +97,7 @@ export default function SignIn() {
                 });
             } else {
                 // Non-Axios error
-                console.error('Non-Axios error:');
+                ;
                 await Swal.fire({
                     title: 'Error!',
                     text: 'Check input values',
