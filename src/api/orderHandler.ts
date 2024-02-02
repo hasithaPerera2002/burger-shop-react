@@ -6,7 +6,7 @@ import Order from "../models/order.ts";
 const makeOrder = async (order:Order):Promise<AxiosResponse<any>> =>{
     const data = JSON.stringify({
         "userId": order.userId,
-        "burger": order.burger,
+        "burgerId": order.burger,
         "quantity": order.quantity,
         "price": order.price,
         "status": "Pending"

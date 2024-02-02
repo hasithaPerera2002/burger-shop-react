@@ -57,7 +57,7 @@ export function Order() {
 
 
         }catch (e) {
-           console.error('Error deleting burger:', e);
+           console.error('Error ordering burger:', e);
            await Swal.fire({
                title: 'Error!',
                text: 'Failed to order burger',
