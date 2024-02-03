@@ -2,6 +2,8 @@
 
 ![Burger Shop React](./path/to/burger-image.png)
 
+# Visit Website
+![Burger Blitz](https://ephemeral-lollipop-0ed82a.netlify.app/home)
 This project provides a minimal setup to get React working in Vite with HMR (Hot Module Replacement) and some ESLint rules. It supports two official plugins: `@vitejs/plugin-react` and `@vitejs/plugin-react-swc`.
 
 ## Getting Started
