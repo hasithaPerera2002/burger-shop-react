@@ -13,7 +13,7 @@ const createBurger = async (burger: Burger):Promise<AxiosResponse<any>>  => {
     const config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'https://burger-shop-backend-hasitha-1.onrender.com:3000/api/v1/burgers',
+        url: 'https://burger-shop-backend-hasitha-1.onrender.com/api/v1/burgers',
         headers: {
             'Content-Type': 'multipart/form-data',
             'Authorization': 'Bearer YourAccessToken',
@@ -36,7 +36,7 @@ const updateBurger =async (burger:Burger):Promise<AxiosResponse<any>>  => {
     const config = {
         method: "put",
         maxBodyLength: Infinity,
-        url: 'https://burger-shop-backend-hasitha-1.onrender.com:3000/api/v1/burgers/'+burger._id,
+        url: 'https://burger-shop-backend-hasitha-1.onrender.com/api/v1/burgers/'+burger._id,
         headers: {
             'Content-Type': 'multipart/form-data',
             'Authorization': 'Bearer YourAccessToken',
@@ -52,7 +52,7 @@ const deleteBurger = async (id: string):Promise<AxiosResponse<any>> => {
     const config = {
         method: 'delete',
         maxBodyLength: Infinity,
-        url: `https://burger-shop-backend-hasitha-1.onrender.com:3000/api/v1/burgers/${id}`,
+        url: `https://burger-shop-backend-hasitha-1.onrender.com/api/v1/burgers/${id}`,
         headers: {}
     };
    return  await makeRequest(config);
