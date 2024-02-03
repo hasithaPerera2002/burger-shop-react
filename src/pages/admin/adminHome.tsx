@@ -124,7 +124,35 @@ function AdminHome() {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log('handle submit called')
+        if(selectedBurger.name.trim() === '' || selectedBurger.price <= 0 || selectedBurger.image === ''){
+            await Swal.fire({
+                title: 'Error!',
+                text: 'Check input values',
+                icon: 'error',
+                confirmButtonText: 'OK',
+            });
+            return;
+        }
+        if (selectedBurger.image === '') {
+            await Swal.fire({
+                title: 'Error!',
+                text: 'Image is required',
+                icon: 'error',
+                confirmButtonText: 'OK',
+            });
+            return;
+
+        }
+
+        if (selectedBurger.price <= 0) {
+            await Swal.fire({
+                title: 'Error!',
+                text: 'Price must be greater than 0',
+                icon: 'error',
+                confirmButtonText: 'OK',
+            });
+            return;
+        }
         closeEditModal();
         if (isUpdate) {
 

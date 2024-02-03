@@ -28,8 +28,8 @@ const updateBurger =async (burger:Burger):Promise<AxiosResponse<any>>  => {
     data.append('name', burger.name);
     data.append('image', burger.image);
     data.append('price', burger.price.toString());
-    data.append('featured',String( burger.featured));
-    data.append('offered', String(burger.offered));
+    data.append('featured', burger.featured.toString()||'false');
+    data.append('offered',burger.offered.toString()||'false');
 
 
     const config = {
