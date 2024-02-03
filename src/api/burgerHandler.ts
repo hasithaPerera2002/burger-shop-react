@@ -9,6 +9,7 @@ const createBurger = async (burger: Burger):Promise<AxiosResponse<any>>  => {
     data.append('featured',String( burger.featured));
     data.append('offered', String(burger.offered));
 
+    console.log(data)
 
     const config = {
         method: 'post',
@@ -30,6 +31,8 @@ const updateBurger =async (burger:Burger):Promise<AxiosResponse<any>>  => {
     data.append('price', burger.price.toString());
     data.append('featured', burger.featured.toString()||'false');
     data.append('offered',burger.offered.toString()||'false');
+
+    console.log(data)
 
 
     const config = {
