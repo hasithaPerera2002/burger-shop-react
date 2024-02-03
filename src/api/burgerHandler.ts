@@ -16,7 +16,6 @@ const createBurger = async (burger: Burger):Promise<AxiosResponse<any>>  => {
         url: 'https://burger-shop-backend-hasitha-1.onrender.com/api/v1/burgers',
         headers: {
             'Content-Type': 'multipart/form-data',
-            'Authorization': 'Bearer YourAccessToken',
         },
         data: data
     };
