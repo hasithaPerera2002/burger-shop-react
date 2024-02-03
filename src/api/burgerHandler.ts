@@ -49,6 +49,7 @@ const updateBurger =async (burger:Burger):Promise<AxiosResponse<any>>  => {
 }
 
 const deleteBurger = async (id: string):Promise<AxiosResponse<any>> => {
+    console.log(id)
     const config = {
         method: 'delete',
         maxBodyLength: Infinity,
