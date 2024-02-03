@@ -25,6 +25,7 @@ const createBurger = async (burger: Burger):Promise<AxiosResponse<any>>  => {
    return  await makeRequest(config);
 }
 const updateBurger =async (burger:Burger):Promise<AxiosResponse<any>>  => {
+    console.log(burger, 'burger')
     const data = new FormData();
     data.append('name', burger.name);
     data.append('image', burger.image);
@@ -41,7 +42,6 @@ const updateBurger =async (burger:Burger):Promise<AxiosResponse<any>>  => {
         url: 'https://burger-shop-backend-hasitha-1.onrender.com/api/v1/burgers/'+burger._id,
         headers: {
             'Content-Type': 'multipart/form-data',
-            'Authorization': 'Bearer YourAccessToken',
         },
         data: data
     };
