@@ -54,7 +54,7 @@ function AdminHome() {
 
     const handleDeleteBtn = async () => {
 
-        console.log('called delete button', selectedBurger._id)
+        console.log(`called delete button anew ${selectedBurger}`, selectedBurger._id)
         console.log(selectedBurger._id)
         try {
             const response = await deleteBurger(selectedBurger._id);
