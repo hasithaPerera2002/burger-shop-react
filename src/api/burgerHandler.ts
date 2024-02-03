@@ -73,7 +73,7 @@ const getAllWithOffer = async ():Promise<AxiosResponse<any>>  => {
     const config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: 'https://burger-shop-backend-hasitha-1.onrender.com:3000/api/v1/burgers?offered=true',
+        url: 'https://burger-shop-backend-hasitha-1.onrender.com/api/v1/burgers?offered=true',
         headers: {}
     };
    return  await makeRequest(config)
