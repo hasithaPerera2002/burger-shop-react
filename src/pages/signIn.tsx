@@ -52,17 +52,16 @@ export default function SignIn() {
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setLoading(true);
-        const data = new FormData(event.currentTarget);
+
 
         try {
             const response = await loginUser(
                 formData.email,
                 formData.password
             );
-            ;
+
 
             if (response.status == 200) {
-
                 const payload = {
                     token: 'someToken',
                     role: 'someRole',
@@ -97,7 +96,7 @@ export default function SignIn() {
                 });
             } else {
                 // Non-Axios error
-                ;
+
                 await Swal.fire({
                     title: 'Error!',
                     text: 'Check input values',
